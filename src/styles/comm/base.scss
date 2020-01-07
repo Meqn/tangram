@@ -1,0 +1,80 @@
+
+html, body {
+	color: rgba(0,0,0,.65);
+	font-size: 14px;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+	font-variant: tabular-nums;
+	line-height: 1.5;
+	background-color: #fff;
+	font-feature-settings: "tnum"
+}
+
+[tabindex="-1"]:focus {
+	outline: 0!important
+}
+b, strong {
+	font-weight: bolder
+}
+
+small {
+	font-size: 80%;
+}
+
+sub,sup {
+	position: relative;
+	font-size: 75%;
+	line-height: 0;
+	vertical-align: baseline
+}
+
+sub {
+	bottom: -.25em
+}
+
+sup {
+	top: -.5em
+}
+
+a {
+	color: #1890ff;
+	text-decoration: none;
+	background-color: transparent;
+	outline: 0;
+	cursor: pointer;
+	transition: color .3s;
+	-webkit-text-decoration-skip: objects
+}
+
+a:hover {
+	color: #40a9ff
+}
+
+a:active {
+	color: #096dd9
+}
+
+a:active,a:hover {
+	text-decoration: none;
+	outline: 0
+}
+
+a[disabled] {
+	color: rgba(0,0,0,.25);
+	cursor: not-allowed;
+	pointer-events: none
+}
+
+code,kbd,pre,samp {
+	font-size: 1em;
+	font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+}
+
+pre {
+	margin-top: 0;
+	margin-bottom: 1em;
+	overflow: auto;
+}
+
+[hidden] {
+	display: none!important;
+}

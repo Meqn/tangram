@@ -1,0 +1,91 @@
+
+.clearfix {
+	zoom: 1
+}
+
+.clearfix:after,.clearfix:before {
+	display: table;
+	content: ""
+}
+
+.clearfix:after {
+	clear: both
+}
+
+$fonts: 12, 14, 16, 18, 20, 24, 28, 32, 36;
+@each $f in $fonts {
+  .font#{$f}{
+    font-size: $f + px;
+  }
+}
+
+$gaps: 4, 8, 12, 16, 20, 24, 32, 40;
+@each $g in $gaps {
+  .mt#{$g} {
+    margin-top: $g + px;
+  }
+  .mr#{$g} {
+    margin-right: $g + px;
+  }
+  .mb#{$g} {
+    margin-bottom: $g + px;
+  }
+  .ml#{$g} {
+    margin-left: $g + px;
+  }
+  .pt#{$g} {
+    padding-top: $g + px;
+  }
+  .pr#{$g} {
+    padding-right: $g + px;
+  }
+  .pb#{$g} {
+    padding-bottom: $g + px;
+  }
+  .pl#{$g} {
+    padding-left: $g + px;
+  }
+}
+
+.flex{
+  display: flex;
+  &-item{
+    flex: 1;
+  }
+  &-justify{
+    &-left{
+      @extend .flex;
+      justify-content: flex-start;
+    }
+    &-center{
+      @extend .flex;
+      justify-content: flex-start;
+    }
+    &-right{
+      @extend .flex;
+      justify-content: flex-end;
+    }
+    &-between{
+      @extend .flex;
+      justify-content: space-between;
+    }
+    &-around{
+      @extend .flex;
+      justify-content: space-around;
+    }
+  }
+  &-align{
+    &-top{
+      @extend .flex;
+      align-items: flex-start;
+    }
+    &-center{
+      @extend .flex;
+      align-items: center;
+    }
+    &-bottom{
+      @extend .flex;
+      align-items: flex-end;
+    }
+  }
+}

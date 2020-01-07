@@ -1,0 +1,86 @@
+/*! minireset.css v0.0.6 | MIT License | github.com/jgthms/minireset.css */
+html, body, p, ol, ul, li, dl, dt, dd,
+blockquote, figure, fieldset, legend, textarea, pre, iframe,
+hr, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
+	display: block
+}
+
+ul {
+  list-style: none;
+}
+
+button,
+input,
+optgroup
+select,
+textarea {
+  margin: 0;
+  color: inherit;
+	font-size: inherit;
+	font-family: inherit;
+	line-height: inherit
+}
+
+html {
+  box-sizing: border-box;
+  font-family: sans-serif;
+	line-height: 1.15;
+  -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS */
+  -ms-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // -webkit-tap-highlight-color: transparent;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+img,
+video {
+  height: auto;
+  max-width: 100%;
+}
+
+iframe {
+  border: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+td:not([align]),
+th:not([align]) {
+  text-align: left;
+}
+
+input[type=number], input[type=password], input[type=text], textarea {
+	-webkit-appearance: none
+}
+input::-ms-clear, input::-ms-reveal {
+	display: none
+}
+
+hr {
+	box-sizing: content-box;
+	height: 0;
+	overflow: visible
+}
