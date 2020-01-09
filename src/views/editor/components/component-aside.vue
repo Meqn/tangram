@@ -1,5 +1,5 @@
 <template>
-  <el-tabs v-model="activeLeftTab" @tab-click="onTabChange">
+  <el-tabs v-model="activeLeftTab" @tab-click="onTabChange" class="pe-aside-tabs">
     <!-- 组件库 -->
     <el-tab-pane label="组件库" name="components">
       <el-collapse v-model="activeComponent" accordion>

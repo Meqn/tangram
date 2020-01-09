@@ -12,11 +12,14 @@ export default {
   name: 'attribute-item',
   props: {
     label: String,
+    // label宽度
     width: {
       type: String,
-      default: '22%'
+      default: '24%'
     },
+    // 间距
     gutter: String,
+    // 侧轴对齐方式
     align: {
       type: String,
       default: 'center',
@@ -24,6 +27,7 @@ export default {
         return ['top', 'center', 'bottom'].indexOf(val) >= 0
       }
     },
+    // 是否垂直布局
     column: {
       type: Boolean,
       default: false
@@ -31,7 +35,7 @@ export default {
   },
   computed: {
     conStyle () {
-      return this.column ? { 'margin-top': this.gutter || '6px' } : { 'margin-left': this.gutter || '12px' }
+      return this.column ? { 'margin-top': this.gutter || '6px' } : { 'margin-left': this.gutter || '10px' }
     }
   }
 }

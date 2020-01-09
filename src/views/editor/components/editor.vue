@@ -14,7 +14,10 @@
         <el-link icon="el-icon-monitor">全屏</el-link>
       </div>
     </header>
-    <div class="pe-main-bd"></div>
+    <div class="pe-main-bd">
+      <!-- <div style="width: 3200px; height: 2000px; background-color: rgba(255, 0 , 0, .5)"></div> -->
+    </div>
+    <footer class="pe-main-ft"></footer>
   </div>
 </template>
 

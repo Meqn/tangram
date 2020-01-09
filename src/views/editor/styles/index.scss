@@ -6,7 +6,7 @@
   &-header{
     position: relative;
     display: flex;
-    margin-bottom: 12px;
+    // margin-bottom: 12px;
     align-items: center;
     background-color: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
@@ -23,18 +23,25 @@
     overflow: hidden;
   }
   &-aside{
-    &-store{
-      height: 100%;
-      background-color: #fff;
-      overflow: hidden;
-      overflow-y: scroll;
-
+    // 侧栏 tab
+    &-tabs{
       .el-tabs__nav-scroll{
         padding-left: 12px;
       }
       .el-tabs__header{
         margin-bottom: 8px;
       }
+      .el-tabs__item{
+        padding-top: 8px;
+        height: 54px;
+      }
+    }
+    // 侧栏组件库
+    &-store{
+      height: 100%;
+      background-color: #fff;
+      overflow: hidden;
+      overflow-y: scroll;
       .el-collapse{
         border-top: none;
         border-bottom: none;
@@ -100,6 +107,7 @@
       }
 
     }
+    // 侧栏属性
     &-attr{
       height: 100%;
       background-color: #fff;
@@ -114,12 +122,23 @@
       }
     }
   }
+  // 编辑主体
   &-main{
+    display: flex;
+    flex-direction: column;
     height: 100%;
+
+    &-wrap{
+      background-color: rgb(233, 233, 233);
+      background-image: linear-gradient(45deg,#f5f5f5 25%,rgba(0,0,0,0) 0,rgba(0,0,0,0) 75%,#f5f5f5 0),linear-gradient(45deg,#f5f5f5 25%,rgba(0,0,0,0) 0,rgba(0,0,0,0) 75%,#f5f5f5 0);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+    }
 
     &-hd{
       display: flex;
       align-items:center;
+      height: 54px;
       padding: 6px 12px;
       background-color: #fff;
       .handle-group{
@@ -128,6 +147,15 @@
       .el-link{
         margin-left: 24px;
       }
+    }
+    &-ft{
+      height: 24px;
+    }
+    &-bd{
+      flex: 1;
+      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: auto;
     }
   }
 }

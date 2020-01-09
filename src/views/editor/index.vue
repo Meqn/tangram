@@ -17,11 +17,11 @@
       <ComponentAside />
     </el-aside>
     <!-- 主体编辑区域 -->
-    <el-main style="padding-top: 0; padding-bottom: 0">
+    <el-main class="pe-main-wrap" style="padding: 0 12px;">
       <PageEditor></PageEditor>
     </el-main>
     <!-- 属性栏 -->
-    <el-aside width="320px" class="pe-aside-attr">
+    <el-aside width="340px" class="pe-aside-attr">
       <AttributeAside />
     </el-aside>
   </el-container>
