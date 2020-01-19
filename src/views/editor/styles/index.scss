@@ -2,7 +2,7 @@
 #app{
   overflow: hidden;
 }
-.pe{
+.ta-edit{
   &-header{
     position: relative;
     display: flex;
@@ -30,6 +30,10 @@
       }
       .el-tabs__header{
         margin-bottom: 8px;
+      }
+      .el-tab-pane{
+        padding-top: 12px;
+        padding-bottom: 12px;
       }
       .el-tabs__item{
         padding-top: 8px;
@@ -113,12 +117,17 @@
       background-color: #fff;
       overflow: hidden;
       overflow-y: scroll;
+
       .el-tabs__nav-scroll{
         padding-left: 12px;
       }
       .el-tabs__content{
         padding-left: 12px;
         padding-right: 12px;
+      }
+      .sub-pannel{
+        margin-left: 16px;
+        margin-bottom: 12px;
       }
     }
   }
@@ -135,7 +144,7 @@
       background-position: 0 0, 10px 10px;
     }
 
-    &-hd{
+    &-header{
       display: flex;
       align-items:center;
       height: 54px;
@@ -148,10 +157,10 @@
         margin-left: 24px;
       }
     }
-    &-ft{
+    &-footer{
       height: 24px;
     }
-    &-bd{
+    &-body{
       flex: 1;
       overflow: hidden;
       overflow-y: auto;
