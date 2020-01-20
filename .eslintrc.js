@@ -14,6 +14,9 @@ module.exports = {
     'comma-dangle': 0,
     'no-trailing-spaces': 0,
     'space-before-function-paren': 0,
+    'no-useless-escape': 0,
+    'no-multi-spaces': 0,
+    'spaced-comment': 0,
   },
   parserOptions: {
     parser: 'babel-eslint'
