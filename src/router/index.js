@@ -1,8 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import DemoRoutes from '../views/demo'
+import DemoRoutes from '../views/demo/routes'
 
+// Throw Error "NavigationDuplicated" #2872
+// https://stackoverflow.com/questions/57837758/navigationduplicated-navigating-to-current-location-search-is-not-allowed
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 Vue.use(VueRouter)
 
 const routes = [

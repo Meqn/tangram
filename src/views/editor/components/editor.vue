@@ -17,9 +17,26 @@
     </header>
     <div class="ta-edit-main-body">
       <!-- <div style="width: 3200px; height: 2000px; background-color: rgba(255, 0 , 0, .5)"></div> -->
-      <el-row type="flex" class="row-bg" :gutter="2" justify="space-between" align="middle">
+      <ta-row :gutter="24">
+        <ta-col>
+          <ta-staff />
+        </ta-col>
+        <ta-col>
+          <ta-environment />
+        </ta-col>
+        <ta-col>
+          <ta-elevator />
+        </ta-col>
+        <ta-col>
+          <ta-tower-crane />
+        </ta-col>
+        <ta-col>
+          <ta-monitor-slide />
+        </ta-col>
+      </ta-row>
+      <el-row type="flex" class="row-bg" :gutter="24" justify="space-between" align="middle">
         <el-col :span="8" class="grid-content">1</el-col>
-        <el-col class="grid-content">2</el-col>
+        <el-col :span="null" class="grid-content">2</el-col>
         <el-col class="grid-content">3</el-col>
       </el-row>
     </div>
