@@ -9,13 +9,13 @@
     @start="drag = true"
     @end="drag = false"
   >
-    <template v-for="(item, index) in realValue">
+    <template v-for="item in realValue">
       <component
         :is="item.component"
-        v-bind="item.props"
-        :key="`${item.info.id}-${index}`"
+        v-bind="clean(item.props)"
+        :key="item.info.id"
         @click.native.stop="handleSelect(item)"
-        :ref="`component-${item.info.id}`"
+        :ref="item.info.id"
       >
         <template v-if="item.children && Object.keys(item.children).length > 0">
           <template v-for="slot in Object.keys(item.children)">
@@ -36,6 +36,8 @@
 
 <script>
 import Draggable from 'vuedraggable'
+import { filterProp } from '@/utils'
+
 export default {
   name: 'drag-item',
   components: {
@@ -76,6 +78,10 @@ export default {
     }
   },
   methods: {
+    clean (obj) {
+      console.log(filterProp(obj))
+      return filterProp(obj)
+    },
     handleUpdate (value) {
       this.$emit('input', value)
     },
@@ -88,6 +94,7 @@ export default {
 <style lang="scss">
 .slot-area{
   min-height: 40px;
+  padding: 4px;
   border: 1px dashed #eee;
 }
 </style>

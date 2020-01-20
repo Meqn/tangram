@@ -7,7 +7,12 @@ export default [
       name: '卡片'
     },
     props: {
-      shadow: 'always'
+      shadow: 'always',
+      test1: '测试属性1',
+      test2: undefined,
+      test3: '',
+      test4: null,
+      test5: NaN
     },
     slots: ['default', 'header']
   }, {
