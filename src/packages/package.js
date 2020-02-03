@@ -18,14 +18,14 @@ import MonitorSlide from './monitorSlide/config'
 export default [
   {
     title: '通用',
-    subTitle: 'Common',
+    name: 'common',
     icon: 'files',
     components: []
   },
   {
     title: '布局',
-    subTitle: 'Layout',
-    icon: 'files',
+    name: 'layout',
+    icon: 'news',
     components: [
       Row,
       Col
@@ -33,8 +33,8 @@ export default [
   },
   {
     title: '设备',
-    subTitle: 'Device',
-    icon: 'files',
+    name: 'device',
+    icon: 'cpu',
     components: [
       Environment,
       Staff,
@@ -45,14 +45,14 @@ export default [
   },
   {
     title: '图表',
-    subTitle: 'Chart',
-    icon: 'files',
+    name: 'chart',
+    icon: 'pie-chart',
     components: []
   },
   {
     title: '其他',
-    subTitle: 'More',
-    icon: 'files',
+    name: 'more',
+    icon: 'set-up',
     components: []
   }
 ]
