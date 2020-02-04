@@ -7,6 +7,7 @@
       @click="$router.push(item.path)">
       {{ item.title }}
     </el-link>
+    <el-link @click="$router.push('/editor')">编辑器</el-link>
   </nav>
   <router-view />
 </div>

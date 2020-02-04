@@ -17,6 +17,7 @@
     </header>
     <div class="ta-edit-main-body">
       <!-- <div style="width: 3200px; height: 2000px; background-color: rgba(255, 0 , 0, .5)"></div> -->
+      <!-- =
       <ta-row :gutter="24">
         <ta-col>
           <ta-staff />
@@ -39,29 +40,27 @@
         <el-col :span="null" class="grid-content">2</el-col>
         <el-col class="grid-content">3</el-col>
       </el-row>
+      -->
+      <DragItem class="ta-drag-wrap" v-model="list" :editable="editable" />
     </div>
     <footer class="ta-edit-main-footer"></footer>
   </div>
 </template>
 
 <script>
+import DragItem from './dragItem'
+
 export default {
   name: 'editor',
+  components: {
+    DragItem
+  },
   data () {
     return {
-      mode: 'edit'
+      mode: 'edit',
+      editable: true,
+      list: []
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.row-bg{
-  background-color: #ccc;
-  padding: 8px 0;
-  height: 100px;
-}
-.grid-content{
-  background-color: #eee;
-}
-</style>

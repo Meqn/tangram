@@ -4,7 +4,7 @@
   <el-header height="64px" class="ta-edit-header">
     <!-- <div class="ta-edit-logo" style="width: 190px">Tangram平台</div> -->
     <div class="ta-edit-logo" style="width: 190px">智慧工地大屏</div>
-    <el-page-header content="创建页面"></el-page-header>
+    <el-page-header content="创建页面" @back="$router.go(-1)"></el-page-header>
     <div class="flex-align-center ta-edit-header-right">
       <el-button type="text" icon="el-icon-s-tools">页面配置</el-button>
       <el-button type="text" icon="el-icon-s-shop" class="ml24">项目信息</el-button>

@@ -7,11 +7,17 @@
         <span class="tab-title">{{ group.title }}</span>
         <small class="tab-name">{{ group.name }}</small>
       </template>
-      <ul class="components-list">
+      <Draggable
+        class="components-list"
+        tag="ul"
+        :list="group.components"
+        :sort="false"
+        :clone="clone"
+        :group="{ name: 'page', pull: 'clone', put: false }">
         <template v-if="group.components && group.components.length > 0">
         <ComponentItem v-for="component in group.components" :key="component.component" :data="component" />
         </template>
-      </ul>
+      </Draggable>
     </el-collapse-item>
     <!-- 
     <el-collapse-item name="1">
@@ -72,19 +78,24 @@
 import ComponentItem from './componentItem'
 import PackageList from '@/packages/package.js'
 import { cloneComponent } from '@/utils'
-// import Draggable from 'vuedraggable'
+import Draggable from 'vuedraggable'
 
 export default {
   name: 'component-store',
   components: {
     ComponentItem,
-    // Draggable
+    Draggable
   },
   data () {
-    console.log('packages : ', cloneComponent(PackageList[1].components[1]))
     return {
       packages: PackageList,
-      activeComponent: 'layout'
+      activeComponent: 'device'
+    }
+  },
+  methods: {
+    clone (e) {
+      console.log('clone : ', e, cloneComponent(e))
+      return cloneComponent(e)
     }
   }
 }

@@ -170,6 +170,10 @@
       overflow: hidden;
       overflow-y: auto;
       overflow-x: auto;
+
+      .ta-drag-wrap{
+        height: 100%;
+      }
     }
   }
 }
