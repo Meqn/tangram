@@ -1,5 +1,5 @@
 <template>
-  <Wrap class="ta-tower-crane"></Wrap>
+  <Wrap class="ta-tower-crane"><slot></slot></Wrap>
 </template>
 
 <script>

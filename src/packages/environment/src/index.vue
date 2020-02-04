@@ -1,5 +1,5 @@
 <template>
-  <Wrap class="ta-environment"></Wrap>
+  <Wrap class="ta-environment"><slot></slot></Wrap>
 </template>
 
 <script>

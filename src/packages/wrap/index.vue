@@ -1,13 +1,12 @@
 <template>
-  <div :class="`ta-component-wrap ${styleClass}`"></div>
+  <div class="ta-component-wrap">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'ta-component-wrap',
-  props: {
-    styleClass: String
-  }
+  name: 'ta-component-wrap'
 }
 </script>
 

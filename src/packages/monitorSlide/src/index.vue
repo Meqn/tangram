@@ -1,5 +1,5 @@
 <template>
-  <Wrap class="ta-monitor-slide"></Wrap>
+  <Wrap class="ta-monitor-slide"><slot></slot></Wrap>
 </template>
 
 <script>
