@@ -42,20 +42,6 @@ export default {
     AsideRight,
     LogUser,
     PageEditor
-  },
-  data () {
-    return {
-      activeLeftTab: 'components',
-      activeComponent: '1'
-    }
-  },
-  methods: {
-    onLeftTabChange (tab, event) {
-      console.log(tab, event)
-    },
-    onNodeClick (data) {
-      console.log(data)
-    }
   }
 }
 </script>

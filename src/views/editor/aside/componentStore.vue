@@ -6,6 +6,7 @@
         <i :class="`tab-icon el-icon-${group.icon}`"></i>
         <span class="tab-title">{{ group.title }}</span>
         <small class="tab-name">{{ group.name }}</small>
+        <small class="tab-count">({{ group.components && group.components.length }})</small>
       </template>
       <Draggable
         class="components-list"
@@ -89,12 +90,11 @@ export default {
   data () {
     return {
       packages: PackageList,
-      activeComponent: 'device'
+      activeComponent: 'layout'
     }
   },
   methods: {
     clone (e) {
-      console.log('clone : ', e, cloneComponent(e))
       return cloneComponent(e)
     }
   }

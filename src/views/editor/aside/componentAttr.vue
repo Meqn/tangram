@@ -20,6 +20,7 @@
         <template slot="append">上传</template>
       </el-input>
     </AttributeItem>
+    <h2>{{ $store.state.page.currentComponent && $store.state.page.currentComponent.info.name }}</h2>
   </div>
 </template>
 
@@ -33,6 +34,7 @@ export default {
   },
   data () {
     return {
+      currentComponent: this.$store.state.page.currentComponent,
       input: '',
       num: 5,
       bool: true,

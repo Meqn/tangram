@@ -9,7 +9,7 @@
       </el-radio-group>
       <div class="handle-group">
         <el-link icon="el-icon-refresh-left">撤销</el-link>
-        <el-link icon="el-icon-delete">清空</el-link>
+        <el-link icon="el-icon-delete" @click="onReset">清空</el-link>
         <el-link icon="el-icon-folder-checked">保存</el-link>
         <el-link icon="el-icon-view">预览</el-link>
         <el-link icon="el-icon-monitor">全屏</el-link>
@@ -41,7 +41,7 @@
         <el-col class="grid-content">3</el-col>
       </el-row>
       -->
-      <DragItem class="ta-drag-wrap" v-model="list" :editable="editable" />
+      <DragItem class="ta-drag-wrap" v-model="components" :editable="editable" />
     </div>
     <footer class="ta-edit-main-footer"></footer>
   </div>
@@ -49,17 +49,60 @@
 
 <script>
 import DragItem from './dragItem'
+import { mapActions } from 'vuex'
 
 export default {
-  name: 'editor',
+  name: 'editor-main',
   components: {
     DragItem
   },
   data () {
     return {
       mode: 'edit',
-      editable: true,
-      list: []
+      editable: true
+    }
+  },
+  computed: {
+    components: {
+      get () {
+        return this.$store.state.page.components
+      },
+      set (val) {
+        this.updateComponents(val)
+      }
+    }
+  },
+  watch: {
+    mode (newVal) {
+      const handles = {
+        // 编辑模式
+        edit: () => {
+          this.editable = true
+        },
+        // 预览模式
+        view: () => {
+          this.editable = false
+        },
+        // 源码模式
+        code: () => {
+          this.editable = false
+          console.log('源码模式')
+        },
+        // 样式模式
+        style: () => {
+          this.editable = false
+          console.log(' 编写样式')
+        }
+      }
+      handles[newVal] && handles[newVal]()
+    }
+  },
+  methods: {
+    ...mapActions('page', [
+      'updateComponents'
+    ]),
+    onReset (evt) {
+      this.updateComponents([])
     }
   }
 }

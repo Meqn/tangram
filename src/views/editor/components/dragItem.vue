@@ -8,12 +8,14 @@
     @input="handleUpdate"
     @start="drag = true"
     @end="drag = false"
+    @change="onChange"
   >
     <template v-for="item in realValue">
       <component
         :is="item.component"
-        v-bind="clean(item.props)"
+        v-bind="cleanProp(item.props)"
         :key="item.info.id"
+        :class="{ 'is-active': item.info.active }"
         @click.native.stop="handleSelect(item)"
         :ref="item.info.id"
       >
@@ -37,6 +39,7 @@
 <script>
 import Draggable from 'vuedraggable'
 import { filterProp } from '@/utils'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'drag-item',
@@ -78,23 +81,80 @@ export default {
     }
   },
   methods: {
-    clean (obj) {
-      console.log(filterProp(obj))
+    ...mapActions('page', [
+      'updateCurrentComponent',
+      'updatePrevComponent'
+    ]),
+    cleanProp (obj) {
       return filterProp(obj)
     },
     handleUpdate (value) {
       this.$emit('input', value)
     },
     handleSelect (item) {
-      console.log('click : ', item)
+      // item.info.active = !item.info.active
+      console.log('点击 ... ', item)
+      if (this.editable) {
+        this.compareElement(item)
+      }
+    },
+    onChange (evt) {
+      console.log('onChange ... ', evt)
+      if (evt.added && evt.added.element) {
+        console.log('增加 ... ', evt.added.element)
+        const element = evt.added.element
+        this.compareElement(element)
+      }
+      if (evt.moved && evt.moved.element) {
+        console.log('移动...', evt.moved.element)
+        const element = evt.moved.element
+        this.compareElement(element)
+      }
+      if (evt.removed) {
+        console.log('移除 ... ', evt.removed.element)
+      }
+    },
+    onChoose (evt) {
+      // console.log('onChoose ... ', evt)
+    },
+    compareElement (newEle) {
+      try {
+        const oldEle = this.$store.state.page.currentComponent
+        const prevEle = this.$store.state.page.prevComponent
+        if (newEle !== oldEle) {
+          prevEle && (prevEle.info.active = false)
+          oldEle && (oldEle.info.active = false)
+          newEle.info.active = true
+          
+          this.updateCurrentComponent(newEle)
+          this.updatePrevComponent(oldEle)
+        }
+      } catch (err) {
+        console.error(err)
+      }
     }
   }
 }
 </script>
-<style lang="scss">
-.slot-area{
-  min-height: 64px;
-  padding: 4px;
-  border: 1px dashed #c9cadd;
+<style lang="scss" scoped>
+.drag-item{
+
+  &.slot-area{
+    min-height: 64px;
+    padding: 16px;
+    border: 2px dashed #c9cadd;
+  }
+  .is-active{
+    box-shadow: inset 0 0 0 2px #40a9ff;
+  }
+  /deep/ .components-item{
+    list-style: none;
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #ccc;
+  }
+  /deep/ .sortable-ghost{
+    opacity: .6;
+  }
 }
 </style>

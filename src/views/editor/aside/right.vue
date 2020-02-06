@@ -1,7 +1,7 @@
 <template>
   <el-tabs v-model="attrTab" @tab-click="onTabChange" class="ta-edit-aside-tabs">
     <!-- 属性设置 -->
-    <el-tab-pane label="属性" name="attr" class="pt12">
+    <el-tab-pane label="属性" name="attribute" class="pt12">
       <ComponentAttr />
     </el-tab-pane>
     <!-- 样式设置 -->
@@ -24,7 +24,7 @@ export default {
   },
   data () {
     return {
-      attrTab: 'style'
+      attrTab: 'attribute'
     }
   },
   methods: {
