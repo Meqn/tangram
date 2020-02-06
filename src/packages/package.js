@@ -1,6 +1,9 @@
 // 通用
+import Header from './header/config'
 
 // 布局
+// 一行两列、一行三列、 一行四列、一行五列、一行六列、 两行一列、三行一列、四行一列、五行一列
+// grid: 四宫格、九宫格、六宫格
 import Row from './row/config'
 import Col from './col/config'
 
@@ -20,7 +23,9 @@ export default [
     title: '通用',
     name: 'common',
     icon: 'files',
-    components: []
+    components: [
+      Header
+    ]
   },
   {
     title: '布局',

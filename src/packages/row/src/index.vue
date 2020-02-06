@@ -1,7 +1,7 @@
 <template>
-  <el-row type="flex" v-bind="$attrs">
+  <div class="ta-row">
     <slot></slot>
-  </el-row>
+  </div>
 </template>
 
 <script>
@@ -10,3 +10,11 @@ export default {
   name: 'ta-row'
 }
 </script>
+
+<style lang="scss" scoped>
+.ta-row{
+  > div{
+    display: flex;
+  }
+}
+</style>
