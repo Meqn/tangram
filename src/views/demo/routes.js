@@ -29,7 +29,7 @@ export default {
       name: 'demo-recurse',
       component: Recurse,
       meta: {
-        title: '递归组件'
+        title: '嵌套组件'
       }
     }, {
       path: 'drag',

@@ -91,7 +91,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .slot-area{
   min-height: 40px;
   padding: 4px;
