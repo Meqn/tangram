@@ -1,10 +1,26 @@
 # 组件文档
 
 
-## 目录说明
+## 组件目录
 
-- `components.js` : 组件列表
-- `index.js` : 包列表(含组件)
+- `index.js` : 组件列表
+- `package.js` : 组件配置包
+
+
+
+```
+.
+|____screenshot         // 截图
+| |____default.png      // 缩略图
+|____index.js           // 组件安装
+|____config.js          // 组件配置项
+|____README.md          // 组件说明文档
+|____src                // 组件源码
+| |____index.vue
+
+
+```
+
 
 
 ## 组件配置文件模版
