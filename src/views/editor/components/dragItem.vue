@@ -15,7 +15,7 @@
         :is="item.component"
         v-bind="cleanProp(item.props)"
         :key="item.info.id"
-        :class="{ 'is-active': item.info.active }"
+        :class="{ 'is-active': editable && item.info.active }"
         @click.native.stop="handleSelect(item)"
         :ref="item.info.id"
       >
@@ -92,7 +92,6 @@ export default {
       this.$emit('input', value)
     },
     handleSelect (item) {
-      // item.info.active = !item.info.active
       console.log('点击 ... ', item)
       if (this.editable) {
         this.compareElement(item)
