@@ -1,5 +1,6 @@
 // 通用
 import Header from './header/config'
+import Text from './text/config'
 
 // 布局
 // 一行两列、一行三列、 一行四列、一行五列、一行六列、 两行一列、三行一列、四行一列、五行一列
@@ -24,7 +25,8 @@ export default [
     name: 'common',
     icon: 'files',
     components: [
-      Header
+      Header,
+      Text
     ]
   },
   {

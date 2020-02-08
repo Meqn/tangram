@@ -1,10 +1,14 @@
 <template>
   <div class="ta-header-comm">
-    <div class="ta-header-comm-left">左侧内容</div>
-    <div class="ta-header-comm-main">
-      <h2>{{ title }}</h2>
+    <div class="ta-header-comm-left">
+      <slot name="left">左侧内容</slot>
     </div>
-    <div class="ta-header-comm-right">右侧内容</div>
+    <div class="ta-header-comm-main">
+      <slot><h2>{{ title }}</h2></slot>
+    </div>
+    <div class="ta-header-comm-right">
+      <slot name="right">右侧内容</slot>
+    </div>
   </div>
 </template>
 

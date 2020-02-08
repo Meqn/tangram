@@ -14,5 +14,5 @@ export default {
       }
     }
   },
-  slots: ['default']
+  slots: ['default', 'left', 'right']
 }

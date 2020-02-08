@@ -1,5 +1,6 @@
 // 通用组件
 import Header from './header'
+import Text from './text'
 
 // 布局组件
 import Row from './row'
@@ -14,6 +15,7 @@ import MonitorSlide from './monitorSlide'
 
 const components = [
   Header,
+  Text,
   Row,
   Col,
   Environment,
