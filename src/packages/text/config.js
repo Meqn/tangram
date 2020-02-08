@@ -8,8 +8,13 @@ export default {
   setting: {
     tag: {
       label: '标签',
-      value: 'div',
-      type: 'input'
+      value: 'span',
+      type: 'select',
+      props: {
+        placeholder: '请选择',
+        multiple: false, // 是否多选
+        options: ['span', 'div', 'p', 'ul', 'li'].map(v => ({ label: v, value: v }))
+      }
     },
     content: {
       label: '内容',

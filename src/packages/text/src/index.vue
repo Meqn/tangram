@@ -6,7 +6,10 @@ export default {
       type: String,
       default: 'span'
     },
-    content: String,
+    content: {
+      type: String,
+      default: ''
+    },
     styles: String,
     className: String,
     fontSize: String,

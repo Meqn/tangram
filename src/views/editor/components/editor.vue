@@ -12,7 +12,7 @@
         <el-link icon="el-icon-delete" @click="onReset">清空</el-link>
         <el-link icon="el-icon-folder-checked">保存</el-link>
         <el-link icon="el-icon-view">预览</el-link>
-        <el-link icon="el-icon-monitor">全屏</el-link>
+        <el-link icon="el-icon-monitor" @click="onFullScreen">{{ isFullScreen ? '退出' : '全屏' }}</el-link>
       </div>
     </header>
     <div class="ta-edit-main-body">
@@ -50,6 +50,7 @@
 <script>
 import DragItem from './dragItem'
 import { mapActions } from 'vuex'
+import { fullScreen, isFullScreen } from '@/utils'
 
 export default {
   name: 'editor-main',
@@ -59,7 +60,8 @@ export default {
   data () {
     return {
       mode: 'edit',
-      editable: true
+      editable: true,
+      isFullScreen: isFullScreen()
     }
   },
   computed: {
@@ -103,6 +105,10 @@ export default {
     ]),
     onReset (evt) {
       this.updateComponents([])
+    },
+    onFullScreen (e) {
+      this.isFullScreen = !this.isFullScreen
+      fullScreen(e)
     }
   }
 }

@@ -1,5 +1,29 @@
 <template>
-  <div>
+  <div v-if="propsKey.length > 0">
+    <template v-for="prop in propsKey">
+      <AttributeItem
+        :key="prop"
+        v-if="settings[prop].configurable !== false"
+        :label="settings[prop].label">
+        
+        <template v-if="settings[prop].type === 'input'">
+          <el-input v-model="propsValue[prop]" v-bind="settings[prop].props" size="small"></el-input>
+        </template>
+
+        <template v-if="settings[prop].type === 'select'">
+          <el-select v-model="propsValue[prop]" v-bind="settings[prop].props">
+            <el-option
+              v-for="item in settings[prop].props.options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </template>
+        
+      </AttributeItem>
+    </template>
+
     <AttributeItem label="输入值">
       <el-input v-model="input" size="small" placeholder="请输入标题"></el-input>
     </AttributeItem>
@@ -20,7 +44,7 @@
         <template slot="append">上传</template>
       </el-input>
     </AttributeItem>
-    <h2>{{ $store.state.page.currentComponent && $store.state.page.currentComponent.info.name }}</h2>
+    <h2>{{ currentComponent && currentComponent.info.name }}</h2>
   </div>
 </template>
 
@@ -34,12 +58,25 @@ export default {
   },
   data () {
     return {
-      currentComponent: this.$store.state.page.currentComponent,
       input: '',
       num: 5,
       bool: true,
       date: ''
     }
   },
+  computed: {
+    currentComponent () {
+      return this.$store.state.page.currentComponent
+    },
+    settings () {
+      return (this.currentComponent && this.currentComponent.setting) || {}
+    },
+    propsKey () {
+      return Object.keys(this.settings)
+    },
+    propsValue () {
+      return (this.currentComponent && this.currentComponent.props) || {}
+    }
+  }
 }
 </script>
