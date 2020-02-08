@@ -23,19 +23,21 @@ export function cloneComponent(obj) {
     }
     // 设置 children
     if (slots) {
-      const children = {}
-      slots.forEach(v => {
-        children[v] = []
-      })
-      config.children = children
-    } else {
       if (config.children) {
-        for (const slot in config.children) {
-          if (config.children.hasOwnProperty(slot)) {
-            // 递归子组件
-            config.children[slot].map(node => convert(node))
+        const children = config.children
+        slots.forEach(slot => {
+          if (children[slot]) {
+            children[slot].map(node => convert(node))
+          } else {
+            children[slot] = []
           }
-        }
+        })
+      } else {
+        const children = {}
+        slots.forEach(slot => {
+          children[slot] = []
+        })
+        config.children = children
       }
     }
     return config
