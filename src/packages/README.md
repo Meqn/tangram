@@ -56,6 +56,7 @@
   component: 'layout',
   info: {
     id: 'c1234567234-sf36s6f',
+    dir: '目录名称',
     name: '布局组件',
     active: false
   },
@@ -93,28 +94,44 @@
 
 ## props 配置文档
 
+- `label`: 属性标题
+- `value`: 默认值
+- `type`: 表单控件类型 `[input, textarea, cssInput, inputNumber, select, switch, radioGroup, checkGroup, slider, timePicker, datePicker, colorPicker, colorPicker]`
+- `configurable`: 是否可配置
+- `props`: 控件的属性
+
+
 ```js
 setting = {
+  input: {
+    label: '输入框',
+    value: '默认值',
+    type: 'input',
+    props: {
+      type: '输入框类型: text, number',
+      placeholder: '占位符'
+    }
+  },
+  textarea: {
+    label: '文本域',
+    value: '默认值',
+    type: 'textarea',
+    props: {
+      placeholder: '占位符'
+    }
+  },
   cssInput: {
     label: 'CSS输入框',
     value: '20px',
     type: 'cssInput',
     props: {
-      placeholder: '占位符'
-    }
-  },
-  input: {
-    label: '输入框',
-    value: '输入框内容',
-    type: 'input',
-    props: {
-      type: '输入框类型', // ['']
-      placeholder: '占位符'
+      placeholder: '占位符',
+      auto: false    // 是否可选 `auto` 值 (单位列表)
     }
   },
   inputNumber: {
     label: '计数器',
-    value: 3,
+    value: '默认值',
     type: 'inputNumber',
     props: {
       min: 0, // 最大值
@@ -125,8 +142,8 @@ setting = {
     }
   },
   select: {
-    label: '选择器',
-    value: 3,
+    label: '下拉选择器',
+    value: '默认值',
     type: 'select',
     props: {
       multiple: false, // 是否多选
@@ -141,7 +158,45 @@ setting = {
   switch: {
     label: '开关',
     value: true,  // [boolean / string / number]
-    type: 'select'
+    type: 'switch'
+  },
+  radioGroup: {
+    label: '单选框',
+    value: 'shanghai',
+    type: 'radioGroup',
+    props: {
+      options: [
+        {
+          label: '上海',
+          value: 'shanghai'
+        }, {
+          label: '广州',
+          value: 'guangzhou'
+        }, {
+          label: '深圳',
+          value: 'shenzhen'
+        }
+      ]
+    }
+  },
+  checkGroup: {
+    label: '多选框',
+    value: ['shanghai'],
+    type: 'checkGroup',
+    props: {
+      options: [
+        {
+          label: '上海',
+          value: 'shanghai'
+        }, {
+          label: '广州',
+          value: 'guangzhou'
+        }, {
+          label: '深圳',
+          value: 'shenzhen'
+        }
+      ]
+    }
   },
   slider: {
     label: '滑块',
@@ -149,8 +204,8 @@ setting = {
     type: 'slider',
     props: {
       min: 0,
-      max: 0,
-      step: 0
+      max: 100,
+      step: 10
     }
   },
   timePicker: {
@@ -158,8 +213,9 @@ setting = {
     value: '',
     type: 'timePicker',
     props: {
-      placeholder: '',
-      'picker-options': {}
+      placeholder: '占位内容',
+      'picker-options': {},
+      'default-value': new Date()
     }
   },
   datePicker: {
@@ -167,16 +223,7 @@ setting = {
     value: '',
     type: 'datePicker',
     props: {
-      type: 'date',
-      placeholder: ''
-    }
-  },
-  dateTimePicker: {
-    label: '日期时间选择器',
-    value: '',
-    type: 'dateTimePicker',
-    props: {
-      type: 'datetime',
+      type: 'date',    // date: 日期,  datetime: 日期时间, [year/month/date/dates/ week/datetime/datetimerange/ daterange/monthrange]
       placeholder: ''
     }
   },
@@ -185,7 +232,18 @@ setting = {
     value: false,
     type: 'colorPicker',
     props: {
-      'show-alpha': true
+      'show-alpha': true,
+      'color-format': 'rgb'   // `[hsl, hsv, hex, rgb]`
+    }
+  },
+  upload: {
+    label: '文件上传',
+    value: '',
+    type: 'upload',
+    props: {
+      filePath: '',
+      fileType: '',
+      isSalt: false
     }
   }
 }
