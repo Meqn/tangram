@@ -1,6 +1,6 @@
 <template>
-  <el-input :placeholder="placeholder || '请输入'" v-model="input" type="number" :size="size" :disabled="disabled">
-    <el-select v-model="unitVal" slot="append" placeholder="请选择" style="width: 68px">
+  <el-input :placeholder="placeholder || '请输入'" v-model="input" type="number" :size="size" :disabled="inputDisabled">
+    <el-select v-model="unitVal" slot="append" placeholder="请选择" style="width: 80px">
       <el-option
         v-for="item in cssUnit"
         :key="item.value"
@@ -27,6 +27,10 @@ export default {
       type: Boolean,
       default: false
     },
+    auto: {
+      type: Boolean,
+      default: false
+    },
     placeholder: String
   },
   data () {
@@ -34,11 +38,15 @@ export default {
     let unit = 'px'
     if (this.value) {
       try {
-        const regx = /^(\d+)(px|vw|vh|\em|%)$/i
-        if (regx.test(this.value)) {
-          const arr = this.value.match(regx)
-          input = arr[1]
-          unit = arr[2]
+        if (this.value === 'auto') {
+          unit = this.value
+        } else {
+          const regx = /^(\d+)(px|vw|vh|\em|%)$/i
+          if (regx.test(this.value)) {
+            const arr = this.value.match(regx)
+            input = arr[1]
+            unit = arr[2]
+          }
         }
       } catch (err) {
         console.error(err)
@@ -47,7 +55,19 @@ export default {
     return {
       input: input,
       unitVal: unit,
-      cssUnit: ['px', 'em', 'vw', 'vh', '%'].map(v => ({ value: v, label: v }))
+      cssUnit2: ['px', 'em', 'vw', 'vh', '%', 'auto'].map(v => ({ value: v, label: v }))
+    }
+  },
+  computed: {
+    cssUnit () {
+      const unitList = ['px', 'em', 'vw', 'vh', '%']
+      if (this.auto) {
+        unitList.push('auto')
+      }
+      return unitList.map(v => ({ value: v, label: v }))
+    },
+    inputDisabled () {
+      return this.unitVal === 'auto' ? true : this.disabled
     }
   },
   watch: {
@@ -55,7 +75,7 @@ export default {
       this.$emit('input', val + this.unitVal)
     },
     unitVal (val) {
-      this.$emit('input', this.input + val)
+      this.$emit('input', val === 'auto' ? 'auto' : this.input + val)
     }
   }
 }
