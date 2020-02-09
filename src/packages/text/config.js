@@ -2,8 +2,7 @@ export default {
   component: 'ta-text',
   info: {
     name: '文本内容',
-    dir: 'text',
-    type: 'textarea'
+    dir: 'text'
   },
   setting: {
     tag: {
@@ -13,15 +12,15 @@ export default {
       props: {
         placeholder: '请选择',
         multiple: false, // 是否多选
-        options: ['span', 'div', 'p', 'ul', 'li'].map(v => ({ label: v, value: v }))
+        options: ['span', 'div', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'li'].map(v => ({ label: v, value: v }))
       }
     },
     content: {
       label: '内容',
-      value: '<span>哈哈哈 😄😄😄 吼吼吼</span>',
-      type: 'input',
+      value: '文本内容',
+      type: 'textarea',
       props: {
-        placeholder: '请填写标题'
+        placeholder: '请填写内容'
       }
     },
     className: {
@@ -29,20 +28,20 @@ export default {
       value: 'text',
       type: 'input'
     },
-    styles: {
-      label: '自定义样式',
-      value: 'background-color: #ccc;box-shadow: 0 0 5px #0f0',
-      type: 'input'
-    },
     fontSize: {
       label: '字体尺寸',
       value: '20px',
-      type: 'input'
+      type: 'cssInput'
     },
     color: {
       label: '文本颜色',
       value: '#f00',
-      type: 'input'
+      type: 'colorPicker'
+    },
+    styles: {
+      label: '其他样式',
+      value: 'background-color: #ccc;box-shadow: 0 0 5px #0f0',
+      type: 'textarea'
     }
   }
 }
