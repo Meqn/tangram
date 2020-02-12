@@ -10,7 +10,7 @@
       <div class="handle-group">
         <el-link icon="el-icon-refresh-left">撤销</el-link>
         <el-link icon="el-icon-delete" @click="onReset">清空</el-link>
-        <el-link icon="el-icon-folder-checked">保存</el-link>
+        <el-link icon="el-icon-folder-checked" @click="onSave">保存</el-link>
         <el-link icon="el-icon-view">预览</el-link>
         <el-link icon="el-icon-monitor" @click="onFullScreen">{{ isFullScreen ? '退出' : '全屏' }}</el-link>
       </div>
@@ -41,9 +41,18 @@
         <el-col class="grid-content">3</el-col>
       </el-row>
       -->
-      <DragItem class="ta-drag-wrap" v-model="components" :editable="editable" />
+      <DragItem class="ta-drag-wrap" v-model="components" :editable="editable" :ctxMenu="$refs.contextMenu" />
     </div>
     <footer class="ta-edit-main-footer"></footer>
+    <ContextMenu ref="contextMenu">
+      <template v-slot:default="item">
+        <li><a @click.prevent="onMenuClick(item.data)">当前元素</a></li>
+        <li><a @click.prevent="onMenuClick">复制</a></li>
+        <li><a @click.prevent="onMenuClick">粘贴</a></li>
+        <li><a @click.prevent="onMenuClick">删除</a></li>
+        <li><a @click.prevent="onMenuClick">全屏</a></li>
+      </template>
+    </ContextMenu>
   </div>
 </template>
 
@@ -51,11 +60,15 @@
 import DragItem from './dragItem'
 import { mapActions } from 'vuex'
 import { fullScreen, isFullScreen } from '@/utils'
+import ContextMenu from 'vue-context'
+import 'vue-context/src/sass/vue-context.scss'
+// @contextmenu.prevent.native="$refs.contextMenu.open($event)"
 
 export default {
   name: 'editor-main',
   components: {
-    DragItem
+    DragItem,
+    ContextMenu
   },
   data () {
     return {
@@ -109,6 +122,12 @@ export default {
     onFullScreen (e) {
       this.isFullScreen = !this.isFullScreen
       fullScreen(e)
+    },
+    onSave () {
+      console.log(this.components)
+    },
+    onMenuClick (e) {
+      console.log('menu : ', e)
     }
   }
 }

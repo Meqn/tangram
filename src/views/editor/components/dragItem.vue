@@ -18,6 +18,8 @@
         :class="{ 'is-active': editable && item.info.active }"
         @click.native.stop="handleSelect(item)"
         :ref="item.info.id"
+        :id="item.info.id"
+        @contextmenu.native.stop.prevent="ctxMenu.open($event, item)"
       >
         <template v-if="item.children && Object.keys(item.children).length > 0">
           <template v-for="slot in Object.keys(item.children)">
@@ -28,7 +30,8 @@
               :slot="slot"
               :class="{ 'slot-area': editable }"
               :list="item.children[slot]"
-              :editable="editable" />
+              :editable="editable"
+              :ctxMenu="ctxMenu" />
           </template>
         </template>
       </component>
@@ -58,6 +61,9 @@ export default {
     editable: {
       type: Boolean,
       default: true
+    },
+    ctxMenu: {
+      type: Object
     }
   },
   data () {
@@ -93,6 +99,7 @@ export default {
     },
     handleSelect (item) {
       console.log('点击 ... ', item)
+      console.log('contextmenu : ', this.ctxMenu)
       if (this.editable) {
         this.compareElement(item)
       }
