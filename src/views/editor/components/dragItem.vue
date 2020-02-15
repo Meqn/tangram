@@ -42,6 +42,7 @@
 <script>
 import Draggable from 'vuedraggable'
 import { filterProp } from '@/utils'
+import { editorMixin } from './utils'
 import { mapActions } from 'vuex'
 
 export default {
@@ -49,6 +50,7 @@ export default {
   components: {
     Draggable
   },
+  mixins: [editorMixin(mapActions)],
   props: {
     value: {
       type: Array,
@@ -87,10 +89,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions('page', [
-      'updateCurrentComponent',
-      'updatePrevComponent'
-    ]),
     cleanProp (obj) {
       return filterProp(obj)
     },
@@ -118,25 +116,6 @@ export default {
       }
       if (evt.removed) {
         console.log('移除 ... ', evt.removed.element)
-      }
-    },
-    onChoose (evt) {
-      // console.log('onChoose ... ', evt)
-    },
-    compareElement (newEle) {
-      try {
-        const oldEle = this.$store.state.page.currentComponent
-        const prevEle = this.$store.state.page.prevComponent
-        if (newEle !== oldEle) {
-          prevEle && (prevEle.info.active = false)
-          oldEle && (oldEle.info.active = false)
-          newEle.info.active = true
-          
-          this.updateCurrentComponent(newEle)
-          this.updatePrevComponent(oldEle)
-        }
-      } catch (err) {
-        console.error(err)
       }
     }
   }

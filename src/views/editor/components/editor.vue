@@ -17,41 +17,16 @@
     </header>
     <div class="ta-edit-main-body">
       <!-- <div style="width: 3200px; height: 2000px; background-color: rgba(255, 0 , 0, .5)"></div> -->
-      <!-- =
-      <ta-row :gutter="24">
-        <ta-col>
-          <ta-staff />
-        </ta-col>
-        <ta-col>
-          <ta-environment />
-        </ta-col>
-        <ta-col>
-          <ta-elevator />
-        </ta-col>
-        <ta-col>
-          <ta-tower-crane />
-        </ta-col>
-        <ta-col>
-          <ta-monitor-slide />
-        </ta-col>
-      </ta-row>
-      <el-row type="flex" class="row-bg" :gutter="24" justify="space-between" align="middle">
-        <el-col :span="8" class="grid-content">1</el-col>
-        <el-col :span="null" class="grid-content">2</el-col>
-        <el-col class="grid-content">3</el-col>
-      </el-row>
-      -->
-      <DragItem class="ta-drag-wrap" v-model="components" :editable="editable" :ctxMenu="$refs.contextMenu" />
+      <DragItem class="ta-drag-wrap" v-model="components" :editable="editable" :ctxMenu="$refs.ctxMenu" />
     </div>
     <footer class="ta-edit-main-footer"></footer>
-    <ContextMenu ref="contextMenu">
-      <template v-slot:default="item">
-        <li><a @click.prevent="onMenuClick(item.data)">当前元素</a></li>
-        <li><a @click.prevent="onMenuClick">复制</a></li>
-        <li><a @click.prevent="onMenuClick">粘贴</a></li>
-        <li><a @click.prevent="onMenuClick">删除</a></li>
-        <li><a @click.prevent="onMenuClick">全屏</a></li>
-      </template>
+
+    <ContextMenu ref="ctxMenu" @ctx-open="onMenuOpen">
+      <li v-if="$store.state.page.currentComponent" class="menu-item">{{ $store.state.page.currentComponent.info.name }}</li>
+      <li class="menu-item" disabled @click.prevent="onMenuClick">复制</li>
+      <li class="menu-item" @click.prevent="onMenuClick">粘贴</li>
+      <li class="menu-item active" @click.prevent="onMenuClick">删除</li>
+      <li class="menu-item" @click.prevent="onMenuClick">全屏</li>
     </ContextMenu>
   </div>
 </template>
@@ -60,9 +35,8 @@
 import DragItem from './dragItem'
 import { mapActions } from 'vuex'
 import { fullScreen, isFullScreen } from '@/utils'
-import ContextMenu from 'vue-context'
-import 'vue-context/src/sass/vue-context.scss'
-// @contextmenu.prevent.native="$refs.contextMenu.open($event)"
+import { editorMixin } from './utils'
+import ContextMenu from '@/components/contextMenu'
 
 export default {
   name: 'editor-main',
@@ -70,6 +44,7 @@ export default {
     DragItem,
     ContextMenu
   },
+  mixins: [editorMixin(mapActions)],
   data () {
     return {
       mode: 'edit',
@@ -113,9 +88,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions('page', [
-      'updateComponents'
-    ]),
     onReset (evt) {
       this.updateComponents([])
     },
@@ -125,6 +97,11 @@ export default {
     },
     onSave () {
       console.log(this.components)
+    },
+    onMenuOpen(locals) {
+      console.log('open', locals)
+      // compareElement.call(this, locals)
+      this.compareElement(locals)
     },
     onMenuClick (e) {
       console.log('menu : ', e)
