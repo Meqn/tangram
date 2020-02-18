@@ -7,8 +7,8 @@ export default {
   setting: {
     span: {
       label: 'span',
-      value: '',
-      type: 'slider',
+      value: 12,
+      type: 'inputNumber',
       props: {
         min: 0,
         max: 24

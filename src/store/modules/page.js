@@ -1,3 +1,5 @@
+import { removeInArray } from '@/utils'
+
 import {
   UPDATE_COMPONENTS,
   UPDATE_CURRENT_COMPONENTS,
@@ -35,6 +37,15 @@ const actions = {
   },
   updatePrevComponent ({ commit }, payload) {
     commit(UPDATE_PREV_COMPONENTS, payload)
+  },
+  deleteComponent ({ state, commit }) {
+    const current = state.currentComponent
+    const components = state.components
+    if (current && components.length > 0) {
+      console.log('current : ', current)
+      removeInArray(components, current)
+      commit(UPDATE_CURRENT_COMPONENTS, null)
+    }
   }
 }
 

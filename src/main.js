@@ -7,12 +7,13 @@ import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+// 引入 组件包
+import tangramUI from './packages'
 // 引入 自定义样式
-import Tangram from './packages'
 import '@/styles/index.scss'
 
 Vue.use(ElementUI)
-Vue.use(Tangram)
+Vue.use(tangramUI)
 
 Vue.config.productionTip = false
 

@@ -78,7 +78,7 @@
 <script>
 import ComponentItem from './componentItem'
 import PackageList from '@/packages/package.js'
-import { cloneComponent } from '@/utils'
+import { cloneComponent } from '../utils'
 import Draggable from 'vuedraggable'
 
 export default {

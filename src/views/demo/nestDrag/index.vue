@@ -31,7 +31,7 @@ import ComponentItem from './item'
 import DragItem from './dragItem'
 import componentData from './package/pages'
 import componentList from './package/index'
-import { cloneComponent } from '@/utils'
+import { cloneComponent } from '@/views/editor/utils'
 
 export default {
   name: 'demo-nest-drag',

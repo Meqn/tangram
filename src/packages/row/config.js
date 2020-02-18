@@ -6,7 +6,7 @@ export default {
   },
   setting: {
     justify: {
-      label: '水平排列',
+      label: '横轴排列',
       value: '',
       type: 'select',
       props: {
@@ -14,7 +14,7 @@ export default {
       }
     },
     align: {
-      label: '垂直排列',
+      label: '纵轴排列',
       value: '',
       type: 'select',
       props: {

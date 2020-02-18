@@ -12,7 +12,7 @@ export default {
       props: {
         placeholder: '请选择',
         multiple: false, // 是否多选
-        options: ['span', 'div', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'li'].map(v => ({ label: v, value: v }))
+        options: ['span', 'div', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li'].map(v => ({ label: v, value: v }))
       }
     },
     content: {
