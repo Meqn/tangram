@@ -22,20 +22,23 @@
     <footer class="ta-edit-main-footer"></footer>
 
     <ContextMenu ref="ctxMenu" @ctx-open="onMenuOpen">
-      <li v-if="$store.state.page.currentComponent" class="menu-item">{{ $store.state.page.currentComponent.info.name }}</li>
-      <li class="menu-item" disabled @click.prevent="onMenuClick">复制</li>
-      <li class="menu-item" @click.prevent="onMenuClick">粘贴</li>
-      <li class="menu-item active" @click.prevent="onMenuClick">删除</li>
-      <li class="menu-item" @click.prevent="onMenuClick">全屏</li>
+      <li v-if="$store.state.page.currentComponent" class="menu-item active">
+        <i class="menu-icon el-icon-s-grid"></i>
+        {{ $store.state.page.currentComponent.info.name }}
+      </li>
+      <li class="menu-item" disabled @click.prevent="onMenuClick"><i class="menu-icon el-icon-document-copy"></i>复制</li>
+      <li class="menu-item" @click.prevent="onMenuClick"><i class="menu-icon el-icon-brush"></i>粘贴</li>
+      <li class="menu-item" @click.prevent="onMenuDelete"><i class="menu-icon el-icon-delete"></i>删除</li>
+      <li class="menu-item" @click.prevent="onMenuClick"><i class="menu-icon el-icon-printer"></i>导出</li>
+      <li class="menu-item" @click.prevent="onMenuClick"><i class="menu-icon el-icon-monitor"></i>{{ isFullScreen ? '退出全屏' : '全屏' }}</li>
     </ContextMenu>
   </div>
 </template>
 
 <script>
 import DragItem from './dragItem'
-import { mapActions } from 'vuex'
 import { fullScreen, isFullScreen } from '@/utils'
-import { editorMixin } from './utils'
+import { editorMixin, removeInArray } from '../utils'
 import ContextMenu from '@/components/contextMenu'
 
 export default {
@@ -44,7 +47,7 @@ export default {
     DragItem,
     ContextMenu
   },
-  mixins: [editorMixin(mapActions)],
+  mixins: [editorMixin],
   data () {
     return {
       mode: 'edit',
@@ -105,6 +108,13 @@ export default {
     },
     onMenuClick (e) {
       console.log('menu : ', e)
+    },
+    onMenuDelete (e) {
+      const components = this.components
+      const current = this.$store.state.page.currentComponent
+      removeInArray(components, current)
+      this.updateCurrentComponent(null)
+      this.updatePrevComponent(null)
     }
   }
 }

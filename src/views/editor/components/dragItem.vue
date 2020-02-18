@@ -16,10 +16,10 @@
         v-bind="cleanProp(item.props)"
         :key="item.info.id"
         :class="{ 'is-active': editable && item.info.active }"
-        @click.native.stop="handleSelect(item)"
         :ref="item.info.id"
         :id="item.info.id"
-        @contextmenu.native.stop.prevent="ctxMenu.open($event, item)"
+        @click.native.stop="onClickComponent(item)"
+        @contextmenu.native.stop.prevent="onOpenMenu($event, item)"
       >
         <template v-if="item.children && Object.keys(item.children).length > 0">
           <template v-for="slot in Object.keys(item.children)">
@@ -42,15 +42,14 @@
 <script>
 import Draggable from 'vuedraggable'
 import { filterProp } from '@/utils'
-import { editorMixin } from './utils'
-import { mapActions } from 'vuex'
+import { editorMixin } from '../utils'
 
 export default {
   name: 'drag-item',
   components: {
     Draggable
   },
-  mixins: [editorMixin(mapActions)],
+  mixins: [editorMixin],
   props: {
     value: {
       type: Array,
@@ -95,7 +94,12 @@ export default {
     handleUpdate (value) {
       this.$emit('input', value)
     },
-    handleSelect (item) {
+    onOpenMenu (event, data) {
+      if (this.editable) {
+        this.ctxMenu.open(event, data)
+      }
+    },
+    onClickComponent (item) {
       console.log('点击 ... ', item)
       console.log('contextmenu : ', this.ctxMenu)
       if (this.editable) {
