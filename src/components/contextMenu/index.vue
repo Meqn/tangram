@@ -128,6 +128,7 @@ export default {
       on,
       ref: 'contextMenu'
     }, [
+      this.$slots.header,
       h(this.tag, {
         class: {
           'ctx-menu-list': true,
@@ -137,7 +138,8 @@ export default {
         attrs: {
           role: 'menu'
         }
-      }, [this.$slots.default])
+      }, [this.$slots.default]),
+      this.$slots.footer
     ])
   }
 }
@@ -172,6 +174,10 @@ export default {
         opacity: .6;
         cursor: not-allowed;
       }
+    }
+    .menu-icon{
+      color: #707070;
+      margin-right: 8px;
     }
   }
   &-right {
