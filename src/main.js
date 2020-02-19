@@ -11,9 +11,14 @@ import 'element-ui/lib/theme-chalk/index.css'
 import tangramUI from './packages'
 // 引入 自定义样式
 import '@/styles/index.scss'
+// 引入第三方包
+import VueClipboard from 'vue-clipboard2'
 
 Vue.use(ElementUI)
 Vue.use(tangramUI)
+
+VueClipboard.config.autoSetContainer = true // add this line
+Vue.use(VueClipboard)
 
 Vue.config.productionTip = false
 
