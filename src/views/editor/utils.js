@@ -50,6 +50,27 @@ export function cloneComponent(raw) {
 }
 
 /**
+ * 清除组件的脏数据（clone后的组件）
+ * @param {Object} component 组件数据
+ * @return {Object}
+ */
+export function cleanComponent(component) {
+  return (function clean(data) {
+    if (data.info) {
+      delete data.info.id
+      delete data.info.active
+    }
+    // const children = data.children
+    if (data.children && data.slots) {
+      data.slots.forEach(slot => {
+        data.children[slot].map(child => clean(child))
+      })
+    }
+    return data
+  })(JSON.parse(JSON.stringify(component)))
+}
+
+/**
  * 递归删除某个数组内的值
  * @param {Array} list 数据列表
  * @param {[Object, String]} val 当前值

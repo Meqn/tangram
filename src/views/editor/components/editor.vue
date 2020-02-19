@@ -29,16 +29,28 @@
       <li class="menu-item" disabled @click.prevent="onMenuClick"><i class="menu-icon el-icon-document-copy"></i>复制</li>
       <li class="menu-item" @click.prevent="onMenuClick"><i class="menu-icon el-icon-brush"></i>粘贴</li>
       <li class="menu-item" @click.prevent="onMenuDelete"><i class="menu-icon el-icon-delete"></i>删除</li>
-      <li class="menu-item" @click.prevent="onMenuClick"><i class="menu-icon el-icon-printer"></i>导出</li>
+      <li class="menu-item" @click.prevent="onMenuExport"><i class="menu-icon el-icon-printer"></i>导出</li>
       <li class="menu-item" @click.prevent="onMenuClick"><i class="menu-icon el-icon-monitor"></i>{{ isFullScreen ? '退出全屏' : '全屏' }}</li>
     </ContextMenu>
+
+    <el-dialog :visible.sync="dialogComponentSource" center :show-close="false">
+      <el-row slot="title" type="flex" justify="space-between">
+        <span class="el-dialog__title">配置信息</span>
+        <div>
+          <el-button type="primary" size="small" icon="el-icon-document-copy" @click="onCopyCode">复 制</el-button>
+          <el-button size="small" @click="dialogComponentSource = false">关 闭</el-button>
+        </div>
+      </el-row>
+
+      <pre style="height: 50vh">{{ componentSource }}</pre>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import DragItem from './dragItem'
 import { fullScreen, isFullScreen } from '@/utils'
-import { editorMixin, removeInArray } from '../utils'
+import { editorMixin, removeInArray, cleanComponent } from '../utils'
 import ContextMenu from '@/components/contextMenu'
 
 export default {
@@ -52,7 +64,9 @@ export default {
     return {
       mode: 'edit',
       editable: true,
-      isFullScreen: isFullScreen()
+      isFullScreen: isFullScreen(),
+      dialogComponentSource: false,
+      componentSource: '😂哈哈哈'
     }
   },
   computed: {
@@ -63,6 +77,9 @@ export default {
       set (val) {
         this.updateComponents(val)
       }
+    },
+    currentComponent () {
+      return this.$store.state.page.currentComponent
     }
   },
   watch: {
@@ -110,11 +127,24 @@ export default {
       console.log('menu : ', e)
     },
     onMenuDelete (e) {
-      const components = this.components
-      const current = this.$store.state.page.currentComponent
-      removeInArray(components, current)
+      removeInArray(this.components, this.currentComponent)
       this.updateCurrentComponent(null)
       this.updatePrevComponent(null)
+    },
+    onMenuExport (e) {
+      console.log(cleanComponent(this.currentComponent))
+      this.dialogComponentSource = true
+      this.componentSource = cleanComponent(this.currentComponent)
+    },
+    onCopyCode() {
+      this.$copyText(JSON.stringify(this.componentSource)).then(e => {
+        this.$message({
+          message: 'Copied',
+          type: 'success'
+        })
+      }, e => {
+        this.$message.error('Can not copy')
+      })
     }
   }
 }
