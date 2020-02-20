@@ -3,10 +3,14 @@
 
 ## 组件目录
 
-- `index.js` : 组件列表
-- `package.js` : 组件配置包
+**文件说明：**
+
+- `index.js` : 组件列表及组件配置
+- `styles.js` : 公共样式配置
 
 
+
+**目录说明：**
 
 ```
 .
@@ -24,6 +28,12 @@
 
 
 ## 组件配置文件模版
+
+
+> ⚠️ 备注项：
+>   1. style配置项：配置文件经过处理后，会将`style`内的值会覆盖 `@/packages/utils/styles.js` 的值;
+
+
 
 ```js
 {
@@ -43,6 +53,7 @@
       }
     }
   },
+  style: {},    // 公共样式默认值，会覆盖 `packages/sytles.js` 内的默认值
   slots: ['default', 'header']
 }
 ```
@@ -79,6 +90,7 @@
       }
     }
   },
+  style: {},
   props: {
     title: '今日环境统计',
     width: '300px'
