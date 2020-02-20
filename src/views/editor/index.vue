@@ -18,7 +18,7 @@
       <AsideLeft />
     </el-aside>
     <!-- 主体编辑区域 -->
-    <el-main class="ta-edit-main-wrap" style="padding: 0 12px;">
+    <el-main class="ta-edit-main-container" style="padding: 0;">
       <PageEditor></PageEditor>
     </el-main>
     <!-- 属性栏 -->

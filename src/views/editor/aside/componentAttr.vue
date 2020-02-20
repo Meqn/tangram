@@ -109,13 +109,13 @@
     </template>
   </div>
   <div v-else>
-    <el-divider content-position="left">暂无配置项</el-divider>
+    <el-divider content-position="left">无配置项</el-divider>
   </div>
 </template>
 
 <script>
 import AttributeItem from './attrItem'
-import { CssInput } from '../components'
+import { CssInput } from '@/components'
 
 export default {
   name: 'component-attr',

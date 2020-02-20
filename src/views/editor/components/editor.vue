@@ -19,18 +19,21 @@
       <!-- <div style="width: 3200px; height: 2000px; background-color: rgba(255, 0 , 0, .5)"></div> -->
       <DragItem class="ta-drag-wrap" v-model="components" :editable="editable" :ctxMenu="$refs.ctxMenu" />
     </div>
-    <footer class="ta-edit-main-footer"></footer>
 
     <ContextMenu ref="ctxMenu" @ctx-open="onMenuOpen">
-      <li v-if="$store.state.page.currentComponent" class="menu-item active">
+      <li v-if="currentComponent && currentComponent.info" class="menu-item active">
         <i class="menu-icon el-icon-s-grid"></i>
-        {{ $store.state.page.currentComponent.info.name }}
+        {{ currentComponent.info.name }}
       </li>
       <li class="menu-item" disabled @click.prevent="onMenuClick"><i class="menu-icon el-icon-document-copy"></i>复制</li>
-      <li class="menu-item" @click.prevent="onMenuClick"><i class="menu-icon el-icon-brush"></i>粘贴</li>
+      <li class="menu-item"
+        v-if="currentComponent && currentComponent.slots && currentComponent.slots.length > 0"
+        @click.prevent="onMenuClick">
+        <i class="menu-icon el-icon-brush"></i>粘贴
+      </li>
       <li class="menu-item" @click.prevent="onMenuDelete"><i class="menu-icon el-icon-delete"></i>删除</li>
       <li class="menu-item" @click.prevent="onMenuExport"><i class="menu-icon el-icon-printer"></i>导出</li>
-      <li class="menu-item" @click.prevent="onMenuClick"><i class="menu-icon el-icon-monitor"></i>{{ isFullScreen ? '退出全屏' : '全屏' }}</li>
+      <li class="menu-item" @click.prevent="onFullScreen"><i class="menu-icon el-icon-monitor"></i>{{ isFullScreen ? '退出全屏' : '全屏' }}</li>
     </ContextMenu>
 
     <el-dialog :visible.sync="dialogComponentSource" center :show-close="false">
@@ -49,8 +52,8 @@
 
 <script>
 import DragItem from './dragItem'
-import { fullScreen, isFullScreen } from '@/utils'
-import { editorMixin, removeInArray, cleanComponent } from '../utils'
+import { fullScreen, isFullScreen, removeInArray } from '@/utils'
+import { editorMixin, cleanComponent } from '../utils'
 import ContextMenu from '@/components/contextMenu'
 
 export default {
@@ -110,17 +113,17 @@ export default {
   methods: {
     onReset (evt) {
       this.updateComponents([])
+      this.updateCurrentComponent(null)
+      this.updatePrevComponent(null)
     },
     onFullScreen (e) {
       this.isFullScreen = !this.isFullScreen
       fullScreen(e)
     },
     onSave () {
-      console.log(this.components)
+      console.log('save : ', this.components)
     },
     onMenuOpen(locals) {
-      console.log('open', locals)
-      // compareElement.call(this, locals)
       this.compareElement(locals)
     },
     onMenuClick (e) {
