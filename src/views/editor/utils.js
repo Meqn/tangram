@@ -1,5 +1,6 @@
-import { randomId } from '@/utils'
+import { randomId, isObject, isInvalid } from '@/utils'
 import { mapActions } from 'vuex'
+import { styleProps } from '@/packages/utils'
 
 /**
  * 克隆并转换 component配置文件
@@ -9,23 +10,24 @@ import { mapActions } from 'vuex'
 export function cloneComponent(raw) {
   const config = JSON.parse(JSON.stringify(raw))
   return (function convert(config) {
-    const { info, setting, slots } = config
+    const { info, setting, style, slots } = config
     // 设置 name, id, active
     if (info) {
       info.id = `component-${randomId()}`
       info.active = false
     }
-    // 设置 props
+    // 设置 props（含 style、setting）
+    const stylePropsCopy = JSON.parse(JSON.stringify(styleProps))
+    let propsObj = Object.assign({}, stylePropsCopy, style)
     if (setting) {
-      const props = {}
       for (const key in setting) {
         if (setting.hasOwnProperty(key)) {
-          const el = typeof setting[key] === 'object' ? JSON.parse(JSON.stringify(setting[key])) : setting[key]
-          props[key] = el.value
+          const elem = isObject(setting[key]) ? JSON.parse(JSON.stringify(setting[key])) : setting[key]
+          propsObj[key] = elem.value
         }
       }
-      config.props = props
     }
+    config.props = propsObj
     // 设置 children
     if (slots) {
       if (config.children) {
@@ -56,10 +58,31 @@ export function cloneComponent(raw) {
  */
 export function cleanComponent(component) {
   return (function clean(data) {
+    // remove info
     if (data.info) {
       delete data.info.id
       delete data.info.active
     }
+    // remove props
+    const propsData = data.props
+    if (propsData) {
+      // style
+      const styleObj = {}
+      Object.keys(styleProps).forEach(key => {
+        if (!isInvalid(propsData[key])) {
+          styleObj[key] = propsData[key]
+        }
+      })
+      data.style = styleObj
+      // props
+      const settingData = data.setting
+      if (settingData) {
+        Object.keys(settingData).forEach(key => {
+          settingData[key]['value'] = propsData[key]
+        })
+      }
+    }
+    delete data.props
     // const children = data.children
     if (data.children && data.slots) {
       data.slots.forEach(slot => {
@@ -71,28 +94,6 @@ export function cleanComponent(component) {
 }
 
 /**
- * 递归删除某个数组内的值
- * @param {Array} list 数据列表
- * @param {[Object, String]} val 当前值
- */
-export function removeInArray (list, val) {
-  for (let i = 0; i < list.length; i++) {
-    const node = list[i]
-    if (node === val) {
-      list.splice(i, 1)
-      break
-    } else {
-      const children = node.children
-      if (children) {
-        Object.keys(children).forEach(child => {
-          removeInArray(children[child], val)
-        })
-      }
-    }
-  }
-}
-
-/**
  * 页面编辑混入
  * @return {Object}
  */
@@ -101,8 +102,7 @@ export const editorMixin = {
     ...mapActions('page', [
       'updateComponents',
       'updateCurrentComponent',
-      'updatePrevComponent',
-      'deleteComponent'
+      'updatePrevComponent'
     ]),
     // 设置当前选择组件（含拖拽、右键、点击 操作）
     compareElement (newEle) {
