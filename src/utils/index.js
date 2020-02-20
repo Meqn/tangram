@@ -1,4 +1,3 @@
-export { randomId } from './random'
+export * from './util'
 export { deepClone } from './clone'
-export { filterProp } from './clean'
 export { fullScreen, isFullScreen } from './screen'
