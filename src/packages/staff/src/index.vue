@@ -1,11 +1,14 @@
 <template>
-  <Wrap class="ta-staff"><slot></slot></Wrap>
+  <Wrap class="ta-staff" :style="commStyle"><slot></slot></Wrap>
 </template>
 
 <script>
+import { styleMixin } from '@/packages/utils'
 import Wrap from '@/packages/wrap'
+
 export default {
   name: 'ta-staff',
+  mixins: [styleMixin],
   components: {
     Wrap
   }

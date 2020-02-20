@@ -1,11 +1,14 @@
 <template>
-  <Wrap class="ta-elevator"><slot></slot></Wrap>
+  <Wrap class="ta-elevator" :style="commStyle"><slot></slot></Wrap>
 </template>
 
 <script>
+import { styleMixin } from '@/packages/utils'
 import Wrap from '@/packages/wrap'
+
 export default {
   name: 'ta-elevator',
+  mixins: [styleMixin],
   components: {
     Wrap
   }

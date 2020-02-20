@@ -1,11 +1,14 @@
 <template>
-  <Wrap class="ta-tower-crane"><slot></slot></Wrap>
+  <Wrap class="ta-tower-crane" :style="commStyle"><slot></slot></Wrap>
 </template>
 
 <script>
+import { styleMixin } from '@/packages/utils'
 import Wrap from '@/packages/wrap'
+
 export default {
   name: 'ta-tower-crane',
+  mixins: [styleMixin],
   components: {
     Wrap
   }

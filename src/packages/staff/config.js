@@ -7,7 +7,7 @@ export default {
   setting: {
     title: {
       label: '标题',
-      value: '环境监测',
+      value: '人员管理',
       type: 'input',
       props: {
         placeholder: '请填写标题'

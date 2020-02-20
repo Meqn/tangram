@@ -14,5 +14,8 @@ export default {
       }
     }
   },
+  style: {
+    width: '80%'
+  },
   slots: ['default', 'left', 'right']
 }

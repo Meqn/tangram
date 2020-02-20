@@ -1,13 +1,15 @@
 <template>
-  <div class="ta-row">
+  <div class="ta-row" :style="commStyle">
     <slot></slot>
   </div>
 </template>
 
 <script>
+import { styleMixin } from '@/packages/utils'
 // props: ['gutter', 'justify', 'align']
 export default {
-  name: 'ta-row'
+  name: 'ta-row',
+  mixins: [styleMixin],
 }
 </script>
 

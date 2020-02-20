@@ -1,4 +1,6 @@
 <script>
+import { styleMixin } from '@/packages/utils'
+
 export default {
   name: 'ta-text',
   props: {
@@ -15,10 +17,12 @@ export default {
     fontSize: String,
     color: String
   },
+  mixins: [styleMixin],
   render(h) {
     return h(this.tag, {
       class: this.className,
       style: {
+        ...this.commStyle,
         color: this.color,
         fontSize: this.fontSize
       },

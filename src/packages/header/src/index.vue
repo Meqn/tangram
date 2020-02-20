@@ -1,5 +1,5 @@
 <template>
-  <div class="ta-header-comm">
+  <div class="ta-header-comm" :style="commStyle">
     <div class="ta-header-comm-left">
       <slot name="left">左侧内容</slot>
     </div>
@@ -13,8 +13,11 @@
 </template>
 
 <script>
+import { styleMixin } from '@/packages/utils'
+
 export default {
   name: 'ta-header',
+  mixins: [styleMixin],
   props: {
     title: String
   }
