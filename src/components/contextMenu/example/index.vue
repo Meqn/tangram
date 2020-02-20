@@ -16,7 +16,7 @@
 
 <script>
 import MenuWrap from './wrap'
-import ContextMenu from '@/components/contextMenu'
+import { ContextMenu } from '@/components'
 
 export default {
   name: 'contextMenu-demo',
