@@ -43,9 +43,11 @@
     // 侧栏组件库
     &-store{
       height: 100%;
+      border-right: 1px solid #E4E7ED;
       background-color: #fff;
       overflow: hidden;
       overflow-y: scroll;
+
       .el-collapse{
         border-top: none;
         border-bottom: none;
@@ -122,6 +124,7 @@
     // 侧栏属性
     &-attr{
       height: 100%;
+      border-left: 1px solid #E4E7ED;
       background-color: #fff;
       overflow: hidden;
       overflow-y: scroll;
@@ -144,20 +147,17 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-
-    &-wrap{
-      background-color: rgb(233, 233, 233);
-      background-image: linear-gradient(45deg,#f5f5f5 25%,rgba(0,0,0,0) 0,rgba(0,0,0,0) 75%,#f5f5f5 0),linear-gradient(45deg,#f5f5f5 25%,rgba(0,0,0,0) 0,rgba(0,0,0,0) 75%,#f5f5f5 0);
-      background-size: 20px 20px;
-      background-position: 0 0, 10px 10px;
-    }
+    background-color: rgb(233, 233, 233);
+    background-image: linear-gradient(45deg,#f5f5f5 25%,rgba(0,0,0,0) 0,rgba(0,0,0,0) 75%,#f5f5f5 0),linear-gradient(45deg,#f5f5f5 25%,rgba(0,0,0,0) 0,rgba(0,0,0,0) 75%,#f5f5f5 0);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
 
     &-header{
       display: flex;
       align-items:center;
       height: 54px;
       padding: 6px 12px;
-      margin-bottom: 8px;
+      border-bottom: 2px solid #E4E7ED;
       background-color: #fff;
       
       .handle-group{
@@ -167,14 +167,11 @@
         margin-left: 24px;
       }
     }
-    &-footer{
-      height: 24px;
-    }
     &-body{
       flex: 1;
       overflow: hidden;
-      overflow-y: auto;
-      overflow-x: auto;
+      margin: 8px;
+      border: 1px dashed #999;
 
       .ta-drag-wrap{
         height: 100%;
