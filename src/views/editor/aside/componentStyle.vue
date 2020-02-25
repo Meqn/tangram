@@ -1,11 +1,11 @@
 <template>
   <div v-if="styles">
-    <AttributeItem label="宽度"><CssInput v-model="styles.width" /></AttributeItem>
-    <AttributeItem label="高度"><CssInput v-model="styles.height" /></AttributeItem>
-    <AttributeItem label="外部class">
+    <AttributeItem label="宽度" inline><CssInput v-model="styles.width" /></AttributeItem>
+    <AttributeItem label="高度" inline><CssInput v-model="styles.height" /></AttributeItem>
+    <AttributeItem label="外部class" inline>
       <el-input v-model="input" size="small"></el-input>
     </AttributeItem>
-    <AttributeItem label="背景色">
+    <AttributeItem label="背景色" inline>
       <el-color-picker v-model="styles.backgroundColor" size="small" show-alpha></el-color-picker>
     </AttributeItem>
     <AttributeItem label="背景图">
@@ -13,65 +13,87 @@
         <template slot="append">上传</template>
       </el-input>
     </AttributeItem>
-    <AttributeItem label="背景位置">
+    <AttributeItem label="背景位置" inline>
       <el-input v-model="styles.backgroundPosition" size="small"></el-input>
     </AttributeItem>
-    <AttributeItem label="背景尺寸">
+    <AttributeItem label="背景尺寸" inline>
       <el-input v-model="styles.backgroundSize" size="small"></el-input>
     </AttributeItem>
-    <AttributeItem label="透明度">
+    <AttributeItem label="透明度" inline>
       <el-input-number v-model="styles.opacity" controls-position="right" :min="0" :max="1" :step="0.01" size="mini"></el-input-number>
     </AttributeItem>
     <!-- 边框样式 -->
-    <AttributeItem label="边框样式">
-      <CssInput v-model="paddingValue" />
-    </AttributeItem>
-    <AttributeItem label="边框自定义">
-      <el-input v-model="input" size="small"></el-input>
+    <AttributeItem label="内置边框" inline>
+      <el-select value="" placeholder="请选择" size="small" clearable>
+        <el-option value="1">边框样式1</el-option>
+        <el-option value="2">边框样式2</el-option>
+        <el-option value="3">边框样式3</el-option>
+      </el-select>
     </AttributeItem>
     <!-- 内边距设置 -->
-    <AttributeItem label="内边距">
+    <AttributeItem label="内边距" inline>
       <el-switch v-model="isPadding"></el-switch>
     </AttributeItem>
-    <div v-if="isPadding" class="sub-pannel">
-      <el-row :gutter="12" class="mb8">
-        <el-col :span="12"><CssInput v-model="styles.paddingTop" auto placeholder="上" /></el-col>
-        <el-col :span="12"><CssInput v-model="styles.paddingBottom" auto placeholder="下" /></el-col>
-      </el-row>
-      <el-row :gutter="12">
-        <el-col :span="12"><CssInput v-model="styles.paddingLeft" auto placeholder="左" /></el-col>
-        <el-col :span="12"><CssInput v-model="styles.paddingRight" auto placeholder="右" /></el-col>
-      </el-row>
+    <div class="sub-panel" v-if="isPadding">
+      <AttributeItem inline>
+        <CssInput v-model="styles.paddingTop" auto placeholder="padding-top" />
+      </AttributeItem>
+      <AttributeItem inline>
+        <CssInput v-model="styles.paddingBottom" auto placeholder="padding-bottom" />
+      </AttributeItem>
+      <AttributeItem inline>
+        <CssInput v-model="styles.paddingLeft" auto placeholder="padding-left" />
+      </AttributeItem>
+      <AttributeItem inline>
+        <CssInput v-model="styles.paddingRight" auto placeholder="padding-right" />
+      </AttributeItem>
     </div>
     <!-- 外边距设置 -->
-    <AttributeItem label="外边距">
-      <el-switch v-model="isPadding"></el-switch>
+    <AttributeItem label="外边距" inline>
+      <el-switch v-model="isMargin"></el-switch>
     </AttributeItem>
-    <div v-if="isPadding" class="sub-pannel">
-      <el-row :gutter="12" class="mb8">
-        <el-col :span="12"><CssInput v-model="styles.marginTop" auto placeholder="上" /></el-col>
-        <el-col :span="12"><CssInput v-model="styles.marginBottom" auto placeholder="下" /></el-col>
-      </el-row>
-      <el-row :gutter="12">
-        <el-col :span="12"><CssInput v-model="styles.marginLeft" auto placeholder="左" /></el-col>
-        <el-col :span="12"><CssInput v-model="styles.marginRight" auto placeholder="右" /></el-col>
-      </el-row>
+    <div class="sub-panel" v-if="isMargin">
+      <AttributeItem inline>
+        <CssInput v-model="styles.marginTop" auto placeholder="margin-top" />
+      </AttributeItem>
+      <AttributeItem inline>
+        <CssInput v-model="styles.marginBottom" auto placeholder="margin-bottom" />
+      </AttributeItem>
+      <AttributeItem inline>
+        <CssInput v-model="styles.marginLeft" auto placeholder="margin-left" />
+      </AttributeItem>
+      <AttributeItem inline>
+        <CssInput v-model="styles.marginRight" auto placeholder="margin-right" />
+      </AttributeItem>
     </div>
     <!-- 定位设置 -->
-    <AttributeItem label="绝对定位">
-      <el-switch v-model="bool"></el-switch>
+    <AttributeItem label="定位方式" inline>
+      <el-select v-model="styles.position" placeholder="请选择" size="small" clearable>
+        <el-option
+          v-for="item in positionOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
     </AttributeItem>
-    <div v-if="bool" class="sub-pannel">
-      <el-row :gutter="12" class="mb8">
-        <el-col :span="12"><CssInput v-model="styles.top" auto placeholder="上" /></el-col>
-        <el-col :span="12"><CssInput v-model="styles.bottom" auto placeholder="下" /></el-col>
-      </el-row>
-      <el-row :gutter="12" class="mb12">
-        <el-col :span="12"><CssInput v-model="styles.left" auto placeholder="左" /></el-col>
-        <el-col :span="12"><CssInput v-model="styles.right" auto placeholder="右" /></el-col>
-      </el-row>
-      <AttributeItem label="层叠顺序">
-        <el-input-number v-model="styles.zIndex" controls-position="right" size="mini"></el-input-number>
+    <div v-if="styles.position" class="sub-panel">
+      <div class="sub-pannel">
+      <AttributeItem inline width="64px">
+        <CssInput v-model="styles.top" auto placeholder="top" />
+      </AttributeItem>
+      <AttributeItem inline width="64px">
+        <CssInput v-model="styles.bottom" auto placeholder="bottom" />
+      </AttributeItem>
+      <AttributeItem inline width="64px">
+        <CssInput v-model="styles.left" auto placeholder="left" />
+      </AttributeItem>
+      <AttributeItem inline width="64px">
+        <CssInput v-model="styles.right" auto placeholder="right" />
+      </AttributeItem>
+    </div>
+      <AttributeItem label="层叠顺序" width="64px" inline>
+        <el-input-number v-model="styles.zIndex" controls-position="right" size="small"></el-input-number>
       </AttributeItem>
     </div>
   </div>
@@ -81,7 +103,7 @@
 </template>
 
 <script>
-import AttributeItem from './attrItem'
+import { AttributeItem } from '../components'
 import { CssInput } from '@/components'
 
 export default {
@@ -92,15 +114,11 @@ export default {
   },
   data () {
     return {
-      paddingValue: '30%',
       attrTab: 'style',
-      input: '',
-      num: '',
-      bool: true,
-      isPadding: true,
-      date: '',
-      opacity: 0,
-      zIndex: undefined
+      positionOptions: ['static', 'relative', 'absolute'].map(v => ({ value: v, label: v })),
+      isPadding: false,
+      isMargin: false,
+      input: ''
     }
   },
   computed: {

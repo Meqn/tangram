@@ -1,4 +1,9 @@
 <template>
+<div>
+  <AttributeItem v-if="currentComponent && currentComponent.info" :label="currentComponent.info.name">
+    <el-input v-model="currentComponent.info.id" size="small" disabled></el-input>
+  </AttributeItem>
+
   <div v-if="propsKey.length > 0">
     <template v-for="prop in propsKey">
       <AttributeItem
@@ -108,13 +113,13 @@
       </AttributeItem>
     </template>
   </div>
-  <div v-else>
-    <el-divider content-position="left">无配置项</el-divider>
-  </div>
+  
+  <el-divider v-else content-position="left">无配置项</el-divider>
+</div>
 </template>
 
 <script>
-import AttributeItem from './attrItem'
+import { AttributeItem } from '../components'
 import { CssInput } from '@/components'
 
 export default {

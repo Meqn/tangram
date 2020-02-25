@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import ComponentItem from './componentItem'
+import { ComponentItem } from '../components'
 import { packages } from '@/packages'
 import { cloneComponent } from '../utils'
 import Draggable from 'vuedraggable'
