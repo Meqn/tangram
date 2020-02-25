@@ -1,8 +1,9 @@
 <template>
   <el-input
-    :placeholder="placeholder || '请输入'"
+    :class="{ 'is-error': isInvalid }"
+    :placeholder="placeholder || '请输入'" 
     v-model="input"
-    type="number"
+    :type="type"
     :size="size"
     :disabled="inputDisabled">
     <el-select v-model="unitVal" slot="append" placeholder="请选择" style="width: 76px">
@@ -21,6 +22,10 @@ export default {
   name: 'css-input',
   props: {
     value: String,
+    type: {
+      type: String,
+      default: 'number'
+    },
     size: {
       type: String,
       default: 'small',
@@ -41,7 +46,8 @@ export default {
   data () {
     return {
       input: '',
-      unitVal: 'px'
+      unitVal: 'px',
+      isInvalid: false
     }
   },
   computed: {
@@ -57,14 +63,6 @@ export default {
     }
   },
   watch: {
-    input (val) {
-      const regx = /^(-?\d+)(\.\d+)?$/
-      if (regx.test(this.input)) {
-        this.$emit('input', Number(this.input) + this.unitVal)
-      } else {
-        this.$emit('input', '')
-      }
-    },
     unitVal (val) {
       this.$emit('input', val === 'auto' ? 'auto' : this.input + val)
     },
@@ -90,7 +88,28 @@ export default {
     resetValue () {
       this.input = ''
       this.unitVal =  'px'
+    },
+    onBlur(e) {
+      console.log('blur : ', this.input)
+      // 判断 input 是否有效数值
+      const regx = /^(-?\d+)(\.\d+)?$/
+      if (regx.test(this.input)) {
+        this.isInvalid = false
+        this.$emit('input', Number(this.input) + this.unitVal)
+      } else {
+        this.isInvalid = (this.input !== '')
+        this.input = ''
+        this.$emit('input', '')
+      }
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.is-error{
+  /deep/ .el-input__inner{
+    border-color: #f56c6c;
+  }
+}
+</style>
