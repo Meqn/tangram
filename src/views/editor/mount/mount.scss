@@ -1,8 +1,10 @@
 .drag-item{
+  width: 100%;
+  height: 100%;
 
   &.slot-area{
-    min-height: 64px;
-    padding: 16px;
+    min-height: 40px;
+    padding: 12px;
     border: 2px dashed #c9cadd;
   }
   .is-active{
