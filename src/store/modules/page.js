@@ -1,5 +1,3 @@
-import { removeInArray } from '@/utils'
-
 import {
   UPDATE_COMPONENTS,
   UPDATE_CURRENT_COMPONENTS,
