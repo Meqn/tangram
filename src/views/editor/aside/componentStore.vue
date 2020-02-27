@@ -3,7 +3,7 @@
 
     <el-collapse-item v-for="group in packages" :key="group.name" :name="group.name">
       <template slot="title">
-        <i :class="`tab-icon el-icon-${group.icon}`"></i>
+        <ta-icon :name="group.icon" type="element" class="tab-icon" />
         <span class="tab-title">{{ group.title }}</span>
         <small class="tab-name">{{ group.name }}</small>
         <small class="tab-count">({{ group.components && group.components.length }})</small>

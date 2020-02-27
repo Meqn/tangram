@@ -31,43 +31,43 @@
       </el-select>
     </AttributeItem>
     <!-- 内边距设置 -->
-    <AttributeItem label="内边距" inline>
+    <AttributeItem label="内边距" inline class="mb8">
       <el-switch v-model="isPadding"></el-switch>
     </AttributeItem>
     <div class="sub-panel" v-if="isPadding">
-      <AttributeItem inline>
+      <AttributeItem label="上" inline width="16px" class="mb8">
         <CssInput v-model="styles.paddingTop" auto placeholder="padding-top" />
       </AttributeItem>
-      <AttributeItem inline>
+      <AttributeItem label="下" inline width="16px" class="mb8">
         <CssInput v-model="styles.paddingBottom" auto placeholder="padding-bottom" />
       </AttributeItem>
-      <AttributeItem inline>
+      <AttributeItem label="左" inline width="16px" class="mb8">
         <CssInput v-model="styles.paddingLeft" auto placeholder="padding-left" />
       </AttributeItem>
-      <AttributeItem inline>
+      <AttributeItem label="右" inline width="16px">
         <CssInput v-model="styles.paddingRight" auto placeholder="padding-right" />
       </AttributeItem>
     </div>
     <!-- 外边距设置 -->
-    <AttributeItem label="外边距" inline>
+    <AttributeItem label="外边距" inline class="mb8">
       <el-switch v-model="isMargin"></el-switch>
     </AttributeItem>
     <div class="sub-panel" v-if="isMargin">
-      <AttributeItem inline>
+      <AttributeItem label="上" inline width="16px" class="mb8">
         <CssInput v-model="styles.marginTop" auto placeholder="margin-top" />
       </AttributeItem>
-      <AttributeItem inline>
+      <AttributeItem label="下" inline width="16px" class="mb8">
         <CssInput v-model="styles.marginBottom" auto placeholder="margin-bottom" />
       </AttributeItem>
-      <AttributeItem inline>
+      <AttributeItem label="左" inline width="16px" class="mb8">
         <CssInput v-model="styles.marginLeft" auto placeholder="margin-left" />
       </AttributeItem>
-      <AttributeItem inline>
+      <AttributeItem label="右" inline width="16px">
         <CssInput v-model="styles.marginRight" auto placeholder="margin-right" />
       </AttributeItem>
     </div>
     <!-- 定位设置 -->
-    <AttributeItem label="定位方式" inline>
+    <AttributeItem label="定位方式" inline  class="mb8">
       <el-select v-model="styles.position" placeholder="请选择" size="small" clearable>
         <el-option
           v-for="item in positionOptions"
@@ -79,16 +79,16 @@
     </AttributeItem>
     <div v-if="styles.position" class="sub-panel">
       <div class="sub-pannel">
-      <AttributeItem inline width="64px">
+      <AttributeItem label="上" inline width="16px" class="mb8">
         <CssInput v-model="styles.top" auto placeholder="top" />
       </AttributeItem>
-      <AttributeItem inline width="64px">
+      <AttributeItem label="下" inline width="16px" class="mb8">
         <CssInput v-model="styles.bottom" auto placeholder="bottom" />
       </AttributeItem>
-      <AttributeItem inline width="64px">
+      <AttributeItem label="左" inline width="16px" class="mb8">
         <CssInput v-model="styles.left" auto placeholder="left" />
       </AttributeItem>
-      <AttributeItem inline width="64px">
+      <AttributeItem label="右" inline width="16px">
         <CssInput v-model="styles.right" auto placeholder="right" />
       </AttributeItem>
     </div>

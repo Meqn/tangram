@@ -8,16 +8,27 @@
         <el-radio-button label="style">样式(S)</el-radio-button>
       </el-radio-group>
       <div class="handle-group">
-        <el-link icon="el-icon-refresh-left">撤销</el-link>
+        <el-link icon="el-icon-refresh-left" @click="onRevert">撤销</el-link>
         <el-link icon="el-icon-delete" @click="onReset">清空</el-link>
         <el-link icon="el-icon-folder-checked" @click="onSave">保存</el-link>
-        <el-link icon="el-icon-view">预览</el-link>
+        <router-link
+          tag="a"
+          class="el-link el-link--default is-underline"
+          target="_blank"
+          to="preview">
+          <i class="el-icon-view"></i>
+          <span class="el-link--inner">预览</span>
+        </router-link>
         <el-link icon="el-icon-monitor" @click="onFullScreen">{{ isFullScreen ? '退出' : '全屏' }}</el-link>
       </div>
     </header>
-    <div class="ta-edit-main-body">
-      <!-- <div style="width: 3200px; height: 2000px; background-color: rgba(255, 0 , 0, .5)"></div> -->
-      <DragItem class="ta-drag-wrap" v-model="components" :editable="editable" :ctxMenu="$refs.ctxMenu" />
+    <div :class="['ta-edit-main-body', { editable }]">
+      <MountComponent
+        class="ta-drag-wrap"
+        v-model="components"
+        :editable="editable"
+        :ctxMenu="$refs.ctxMenu">
+      </MountComponent>
     </div>
 
     <ContextMenu ref="ctxMenu" @ctx-open="onMenuOpen">
@@ -51,15 +62,16 @@
 </template>
 
 <script>
-import DragItem from './dragItem'
+// import DragItem from './dragItem'
+import MountComponent from './mount'
 import { fullScreen, isFullScreen, removeInArray } from '@/utils'
-import { editorMixin, cleanComponent } from '../utils'
+import { editorMixin, cleanComponent } from './utils'
 import ContextMenu from '@/components/contextMenu'
 
 export default {
-  name: 'editor-main',
+  name: 'editor',
   components: {
-    DragItem,
+    MountComponent,
     ContextMenu
   },
   mixins: [editorMixin],
@@ -69,11 +81,14 @@ export default {
       editable: true,
       isFullScreen: isFullScreen(),
       dialogComponentSource: false,
-      componentSource: '😂哈哈哈'
+      componentSource: ''
     }
   },
   computed: {
     components: {
+      // :bug: 嵌套组件的非根节点的操作不能触发 vuex的 page/updateComponents
+      // 详见: https://github.com/SortableJS/Vue.Draggable/issues/701
+      // 动态创建的 slot追加组件不显示。
       get () {
         return this.$store.state.page.components
       },
@@ -120,8 +135,12 @@ export default {
       this.isFullScreen = !this.isFullScreen
       fullScreen(e)
     },
+    onRevert () {
+      console.log('revert : ', this.$store.state.page.components)
+    },
     onSave () {
       console.log('save : ', this.components)
+      window.localStorage.setItem('components', JSON.stringify(this.components))
     },
     onMenuOpen(locals) {
       this.compareElement(locals)

@@ -42,6 +42,7 @@
     }
     // 侧栏组件库
     &-store{
+      position: relative;
       height: 100%;
       border-right: 1px solid #E4E7ED;
       background-color: #fff;
@@ -123,6 +124,7 @@
     }
     // 侧栏属性
     &-attr{
+      position: relative;
       height: 100%;
       border-left: 1px solid #E4E7ED;
       background-color: #fff;
@@ -136,9 +138,9 @@
         padding-left: 12px;
         padding-right: 12px;
       }
-      .sub-pannel{
+      .sub-panel{
         margin-left: 16px;
-        margin-bottom: 12px;
+        margin-bottom: 16px;
       }
     }
   }
@@ -168,10 +170,16 @@
       }
     }
     &-body{
+      position: relative;
       flex: 1;
       overflow: hidden;
+      overflow-x: auto;
+      overflow-y: auto;
       margin: 8px;
-      border: 1px dashed #999;
+
+      &.editable{
+        border: 1px dashed #999;
+      }
 
       .ta-drag-wrap{
         height: 100%;

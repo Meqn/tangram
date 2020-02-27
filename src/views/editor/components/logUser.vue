@@ -1,6 +1,6 @@
 <template>
   <el-dropdown>
-    <div class="flex-align-center">
+    <div class="flex flex--middle">
       <el-avatar size="small" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar>
       <!-- <span class="ml8">Sisy Chen</span> -->
     </div>
