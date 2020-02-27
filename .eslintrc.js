@@ -17,6 +17,7 @@ module.exports = {
     'no-useless-escape': 0,
     'no-multi-spaces': 0,
     'spaced-comment': 0,
+    'quotes': 0
   },
   parserOptions: {
     parser: 'babel-eslint'
