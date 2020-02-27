@@ -1,10 +1,14 @@
 // 通用
+import Icon from './icon'
+import Card from './Card'
 import Header, { headerConfig } from './header'
 import Text, { textConfig } from './text'
 
 // 布局
 // 一行两列、一行三列、 一行四列、一行五列、一行六列、 两行一列、三行一列、四行一列、五行一列
 // grid: 四宫格、九宫格、六宫格
+import PageContainer, { pageContainerConfig } from './pageContainer'
+import Grid, { gridConfig } from './grid'
 import Row, { rowConfig } from './row'
 import Col, { colConfig } from './col'
 
@@ -23,10 +27,16 @@ import MonitorSlide, { monitorSlideConfig } from './monitorSlide'
  * 组件部分
  */
 const components = [
+  Icon,
+  Card,
   Header,
   Text,
+
+  PageContainer,
+  Grid,
   Row,
   Col,
+
   Environment,
   Staff,
   TowerCrane,
@@ -62,6 +72,8 @@ export const packages = [
     name: 'layout',
     icon: 'news',
     components: [
+      pageContainerConfig,
+      gridConfig,
       rowConfig,
       colConfig
     ]

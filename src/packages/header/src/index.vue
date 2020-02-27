@@ -30,7 +30,7 @@ export default {
   align-items: center;
   color: #fff;
   height: 64px;
-  background-color: #40a9ff;
+  background-color: var(--primary-color);
 
   &-main{
     margin-left: auto;

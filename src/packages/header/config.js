@@ -7,15 +7,12 @@ export default {
   setting: {
     title: {
       label: '标题',
-      value: '七巧板大标题',
+      value: '大标题',
       type: 'input',
       props: {
         placeholder: '请填写标题'
       }
     }
-  },
-  style: {
-    width: '80%'
   },
   slots: ['default', 'left', 'right']
 }

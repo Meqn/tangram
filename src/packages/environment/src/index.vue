@@ -17,7 +17,8 @@ export default {
 
 <style lang="scss" scoped>
 .ta-environment{
-  min-height: 120px;
+  width: 610px;
+  height: 470px;
   background: url("../screenshot/default.png") no-repeat 50%;
   background-size: 100% 100%;
 }
