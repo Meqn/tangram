@@ -19,31 +19,84 @@ $fonts: 12, 14, 16, 18, 20, 24, 28, 32, 36;
   }
 }
 
+// font位置
+.tal{
+  text-align: left;
+}
+.tac{
+  text-align: center;
+}
+.tar{
+  text-align: right;
+}
+.taj{
+  text-align: justify;
+}
+/* 换行 */
+.norwap{
+  white-space: nowrap;
+}
+.break{
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+// 文字过长省略
+.ellipsis{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+%multi-line-clamp{
+  display: -webkit-box;
+  // -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ellipsis-2{
+  @extend %multi-line-clamp;
+  -webkit-line-clamp: 2;
+}
+.ellipsis-3{
+  @extend %multi-line-clamp;
+  -webkit-line-clamp: 3;
+}
+.ellipsis-4{
+  @extend %multi-line-clamp;
+  -webkit-line-clamp: 4;
+}
+.ellipsis-5{
+  @extend %multi-line-clamp;
+  -webkit-line-clamp: 5;
+}
+
+// 内/外边距
 $gaps: 4, 8, 12, 16, 20, 24, 32, 40;
 @each $g in $gaps {
   .mt#{$g} {
-    margin-top: $g + px;
+    margin-top: $g + px !important;
   }
   .mr#{$g} {
-    margin-right: $g + px;
+    margin-right: $g + px !important;
   }
   .mb#{$g} {
-    margin-bottom: $g + px;
+    margin-bottom: $g + px !important;
   }
   .ml#{$g} {
-    margin-left: $g + px;
+    margin-left: $g + px !important;
   }
   .pt#{$g} {
-    padding-top: $g + px;
+    padding-top: $g + px !important;
   }
   .pr#{$g} {
-    padding-right: $g + px;
+    padding-right: $g + px !important;
   }
   .pb#{$g} {
-    padding-bottom: $g + px;
+    padding-bottom: $g + px !important;
   }
   .pl#{$g} {
-    padding-left: $g + px;
+    padding-left: $g + px !important;
   }
 }
 
@@ -52,40 +105,28 @@ $gaps: 4, 8, 12, 16, 20, 24, 32, 40;
   &-item{
     flex: 1;
   }
-  &-justify{
-    &-left{
-      @extend .flex;
-      justify-content: flex-start;
-    }
-    &-center{
-      @extend .flex;
-      justify-content: flex-start;
-    }
-    &-right{
-      @extend .flex;
-      justify-content: flex-end;
-    }
-    &-between{
-      @extend .flex;
-      justify-content: space-between;
-    }
-    &-around{
-      @extend .flex;
-      justify-content: space-around;
-    }
+  &--left{
+    justify-content: flex-start;
   }
-  &-align{
-    &-top{
-      @extend .flex;
-      align-items: flex-start;
-    }
-    &-center{
-      @extend .flex;
-      align-items: center;
-    }
-    &-bottom{
-      @extend .flex;
-      align-items: flex-end;
-    }
+  &--center{
+    justify-content: flex-start;
+  }
+  &--right{
+    justify-content: flex-end;
+  }
+  &--between{
+    justify-content: space-between;
+  }
+  &--around{
+    justify-content: space-around;
+  }
+  &--top{
+    align-items: flex-start;
+  }
+  &--middle{
+    align-items: center;
+  }
+  &--bottom{
+    align-items: flex-end;
   }
 }
