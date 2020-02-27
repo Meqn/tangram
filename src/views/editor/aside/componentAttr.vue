@@ -109,7 +109,40 @@
             <template slot="append">上传</template>
           </el-input>
         </template>
-        
+
+        <!-- 栅格列配置 -->
+        <template v-if="settings[prop].type === 'grid'">
+          <Draggable
+            :list="propsValue[prop]"
+            handle=".handle">
+            <transition-group type="transition" name="flip-list">
+              <div
+                class="attr-grid"
+                v-for="(grid, index) in propsValue[prop]"
+                :key="grid.slot">
+                <i class="el-icon-s-unfold attr-grid-drag handle"></i>
+                <el-input-number
+                  class="ml8 mr12"
+                  v-model="grid.value"
+                  controls-position="right"
+                  :min="1"
+                  :max="24"
+                  :step="1"
+                  size="mini">
+                </el-input-number>
+                <i class="el-icon-remove attr-grid-remove" @click="onColRemove(index, grid, propsValue[prop])"></i>
+              </div>
+            </transition-group>
+            <template slot="footer">
+              <el-button
+                v-if="!settings[prop].props || settings[prop].props.add !== false"
+                class="attr-grid-add"
+                size="mini"
+                @click="onColAdd(propsValue[prop])"
+              >新增列</el-button>
+            </template>
+          </Draggable>
+        </template>
       </AttributeItem>
     </template>
   </div>
@@ -121,12 +154,14 @@
 <script>
 import { AttributeItem } from '../components'
 import { CssInput } from '@/components'
+import Draggable from 'vuedraggable'
 
 export default {
   name: 'component-attr',
   components: {
     AttributeItem,
-    CssInput
+    CssInput,
+    Draggable
   },
   computed: {
     currentComponent () {
@@ -141,6 +176,64 @@ export default {
     propsValue () {
       return (this.currentComponent && this.currentComponent.props) || {}
     }
+  },
+  methods: {
+    onColAdd(list) {
+      // :bug: 动态追加的 Col，在其 slot内操作无响应，需要重载一次 (猜测是 Vue.Draggable问题 )
+      const col = {
+        slot: `col${new Date().getTime()}`,
+        value: 4
+      }
+      list.push(col)
+
+      const current = this.currentComponent
+      if (current) {
+        current.slots && (current.slots.push(col.slot))
+        current.children && (current.children[col.slot] = [])
+      }
+    },
+    onColRemove(index, val, list) {
+      list.splice(index, 1)
+      const current = this.currentComponent
+      if (current) {
+        if (current.slots) {
+          current.slots = current.slots.filter(v => v !== val.slot)
+        }
+        if (current.children) {
+          delete current.children[val.slot]
+        }
+      }
+    }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.attr-grid{
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+
+  &-drag{
+    color: #999;
+    font-size: 22px;
+    cursor: move;
+  }
+  &-remove{
+    color: #fa9a9a;
+    font-size: 22px;
+    cursor: pointer;
+    &:hover{
+      color: #F56C6C;
+      opacity: 1;
+    }
+  }
+  &-add{
+    margin-left: 30px;
+  }
+}
+
+.flip-list-move {
+  transition: transform 0.5s;
+}
+</style>
