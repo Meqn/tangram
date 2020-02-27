@@ -25,6 +25,11 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "editor" */ '../views/editor/index.vue')
   },
+  {
+    path: '/preview',
+    name: 'page-preview',
+    component: () => import(/* webpackChunkName: "editor" */ '../views/editor/preview.vue')
+  },
   DemoRoutes
 ]
 
