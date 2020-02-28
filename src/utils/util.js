@@ -13,6 +13,30 @@ export function randomId() {
   return Math.floor(Math.random() * Date.now()).toString(36)
 }
 
+// 连接线转小驼峰
+export function lineToHump(str) {
+  return str.replace(/\-(\w)/g, function(all, letter) {
+    return letter.toUpperCase()
+  })
+}
+
+// 样式 String 转 Object
+export function styleStrParse(styleStr) {
+  const styleObj = {}
+  const regx = /(;\n)|(\n)|(;)/ig
+  const styleArr = styleStr.replace(regx, '||').split('||')
+  if (styleArr.length > 0) {
+    styleArr.forEach(item => {
+      if (!regx.test(item) && item.indexOf(':') !== -1) {
+        const itemArr = item.split(':')
+        const key = lineToHump(itemArr[0].trim())
+        styleObj[key] = itemArr[1].trim()
+      }
+    })
+  }
+  return styleObj
+}
+
 // 过滤无效属性，并返回新的对象
 export function filterProp (obj) {
   if (isObject(obj)) {
