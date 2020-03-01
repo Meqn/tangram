@@ -2,7 +2,7 @@
   <div v-if="styles">
     <AttributeItem label="宽度" inline><CssInput v-model="styles.width" /></AttributeItem>
     <AttributeItem label="高度" inline><CssInput v-model="styles.height" /></AttributeItem>
-    <AttributeItem label="外部class" inline>
+    <AttributeItem label="样式class" inline>
       <el-input v-model="input" size="small"></el-input>
     </AttributeItem>
     <AttributeItem label="背景色" inline>

@@ -21,7 +21,7 @@
           <el-input
             type="textarea"
             size="small"
-            :autosize="{ minRows: 2, maxRows: 4}"
+            :autosize="{ minRows: 3, maxRows: 5}"
             v-model="propsValue[prop]"
             v-bind="settings[prop].props">
           </el-input>

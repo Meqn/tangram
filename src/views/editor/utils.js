@@ -4,7 +4,7 @@ import { styleProps } from '@/packages/utils'
 
 /**
  * 克隆并转换 component配置文件
- * @param {Object} raw 原生数据
+ * @param {Object} raw 源配置数据
  * @return {Object}
  */
 export function cloneComponent(raw) {
@@ -52,7 +52,7 @@ export function cloneComponent(raw) {
 }
 
 /**
- * 清除组件的脏数据（clone后的组件）
+ * 清除组件脏数据（clone后的组件）
  * @param {Object} component 组件数据
  * @return {Object}
  */
