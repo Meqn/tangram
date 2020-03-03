@@ -2,7 +2,7 @@
   <el-tabs v-model="attrTab" @tab-click="onTabChange" class="ta-edit-aside-tabs">
     <!-- 属性设置 -->
     <el-tab-pane label="属性" name="attribute" class="pt12">
-      <ComponentAttr class="pr8" />
+      <ComponentProp class="pr8" />
     </el-tab-pane>
     <!-- 样式设置 -->
     <el-tab-pane label="样式" name="style" class="pt12">
@@ -14,12 +14,12 @@
 </template>
 
 <script>
-import ComponentAttr from './componentAttr'
+import ComponentProp from './componentProp'
 import ComponentStyle from './componentStyle'
 export default {
   name: 'attribute-aside',
   components: {
-    ComponentAttr,
+    ComponentProp,
     ComponentStyle
   },
   data () {
