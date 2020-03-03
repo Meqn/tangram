@@ -29,9 +29,9 @@
 
 ## 组件配置文件模版
 
-
 > ⚠️ 备注项：
->   1. style配置项：配置文件经过处理后，会将`style`内的值会覆盖 `@/packages/utils/styles.js` 的值;
+>   1. `style`配置项：配置文件经过处理后，会将`style`内的值会覆盖 `@/packages/utils/styles.js` 的值;
+>   2. `setting/relation` 关联配置项。若值为Array，表示值的每一项的值都是 true；若为Object，则表示key作为值的关联属性
 
 
 
@@ -50,7 +50,8 @@
       configurable: false,  // 是否可配置，false为不显示
       props: {
         type: 'number'
-      }
+      },
+      relation: {},   // [Object | Array] 关联字段。 Arry: true则显示， Object: key的值
     }
   },
   style: {},    // 公共样式默认值，会覆盖 `packages/sytles.js` 内的默认值
