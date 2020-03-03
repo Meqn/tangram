@@ -1,47 +1,43 @@
 <template>
-  <div
+  <ta-component-wrapper
     :class="[
       'ta-card',
       `ta-card--${size}`,
       { 'ta-card--divider': divider },
       { 'ta-card--shadow': shadow },
       { 'ta-card--border': border },
-      { 'ta-card--radius': border }
+      { 'ta-card--radius': radius }
     ]"
-    @click="handleClick"
   >
-    <header :class="`ta-card__hd ${headClass}`" :style="headStyle" v-if="title || $slots.header">
+    <header :class="['ta-card__hd', headClass]" :style="headStyle" v-if="title || $slots.header">
       <slot name="header">
-        <div class="ta-card__hd-left">
-          <app-icon :name="icon" class="ta-card__hd-icon" :style="{color: iconColor}" v-if="icon"></app-icon>
-          <h3 class="ta-card__title" :style="{color: titleColor}">{{title}}</h3>
-        </div>
+        <h3 class="ta-card__title" :style="{color: titleColor}">{{title}}</h3>
         <slot name="extra">
           <div
             v-if="extra"
-            class="ta-card__extra"
+            :class="['ta-card__extra', { 'hover': arrow }]"
             :style="{color: extraColor}"
             @click="handleExtra">
             {{extra}}
-            <app-icon v-if="arrow" name="enter" size="sm"></app-icon>
+            <ta-icon v-if="arrow" type="element" name="arrow-right" />
           </div>
         </slot>
       </slot>
     </header>
 
-    <div :class="['ta-card__bd', { bodyClass }]" :style="bodyStyle">
+    <div :class="['ta-card__bd', bodyClass]" :style="bodyStyle">
       <slot></slot>
     </div>
-    <div :class="['ta-card__ft', { footClass }]" :style="footStyle" v-if="$slots.footer">
+    <div :class="['ta-card__ft', footClass]" :style="footStyle" v-if="$slots.footer">
       <slot name="footer"></slot>
     </div>
-  </div>
+  </ta-component-wrapper>
 </template>
 
 <script>
 /* eslint-disable */
 export default {
-  name: 'Card',
+  name: 'ta-card',
   props: {
     shadow: Boolean,    // 是否有阴影
     border: {           // 是否有边框
@@ -56,7 +52,7 @@ export default {
     size: {
       type: String,
       validator(val) {
-        return ['large', 'medium', 'large'].indexOf(val) !== -1
+        return ['large', 'medium', 'small'].indexOf(val) !== -1
       },
       default: 'medium'
     },
@@ -71,16 +67,11 @@ export default {
 
     title: String,
     titleColor: String,
-    icon: String,
-    iconColor: String,
     extra: String,
     extraColor: String,
     arrow: Boolean
   },
   methods: {
-    handleClick (evt) {
-      this.$emit('click', evt)
-    },
     handleExtra (evt) {
       this.$emit('extra', evt)
     }
@@ -90,58 +81,77 @@ export default {
 
 <style lang="scss" scoped>
 .ta-card{
+  --card-head-padding: 12px 20px 10px;
+  --card-padding: 20px;
+  --card-fontsize: 16px;
+  --title-fontsize: 18px;
+  --title-lineheight: 28px;
+  
+  &--large{
+    --card-head-padding: 16px 24px 12px;
+    --card-padding: 24px;
+    --title-fontsize: 20px;
+    --title-lineheight: 32px;
+  }
+  &--small{
+    --card-head-padding: 8px 12px 6px;
+    --card-padding: 12px;
+    --card-fontsize: 14px;
+    --title-fontsize: 16px;
+    --title-lineheight: 20px;
+  }
+  
+  width: 420px;
   background-color: var(--module-background-color);
-  font-size: 28px;
+  font-size: var(--card-fontsize);
   
   &--shadow{
-    box-shadow: 0 4px 16px rgba(0, 0, 0, .09);
+    box-shadow: var(--box-shadow);
   }
   &--border{
-    border: 1px solid -var(--border-color);
+    border: 1px solid var(--border-color);
   }
   &--radius{
-    border-radius: 10px;
+    border-radius: 4px;
   }
 
   &__hd{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 36px 32px 24px;
-
-    &-left{
-      display: flex;
-      align-items: center;
-    }
-    &-icon{
-      margin-right: 12px;
-    }
+    padding: var(--card-head-padding);
 
     .ta-card--divider & {
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--divider-color);
     }
   }
-  &__title, .title, /deep/ .card-title{
-    font-size: 32px;
-    font-weight: bold;
+  &__title, .card-title, /deep/ .card-title{
+    font-size: var(--title-fontsize);
+    line-height: var(--title-lineheight);
+    font-weight: 500;
   }
-  &__extra, .extra{
+  &__extra, /deep/ .card-extra{
     display: flex;
     align-items: center;
-    color: #858b9c;
+    color: var(--secondary-text-color);
+    cursor: pointer;
+
+    &.hover:hover{
+      color: var(--link-color);
+    }
   }
 
   &__bd{
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: var(--card-padding);
+    padding-right: var(--card-padding);
   }
 
   &__ft{
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: var(--card-padding);
+    padding-right: var(--card-padding);
 
     .ta-card--divider & {
-      border-top: 1px solid -var(--border-color);
+      border-top: 1px solid var(--divider-color);
     }
   }
 }
