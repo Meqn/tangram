@@ -105,6 +105,18 @@ $gaps: 4, 8, 12, 16, 20, 24, 32, 40;
   &-item{
     flex: 1;
   }
+  &--row{
+    flex-direction: row;
+  }
+  &--column{
+    flex-direction: column;
+  }
+  &--nowrap{
+    flex-wrap: nowrap;
+  }
+  &--wrap{
+    flex-wrap: wrap;
+  }
   &--left{
     justify-content: flex-start;
   }
@@ -128,5 +140,11 @@ $gaps: 4, 8, 12, 16, 20, 24, 32, 40;
   }
   &--bottom{
     align-items: flex-end;
+  }
+  &--baseline{
+    align-items: baseline;
+  }
+  &--stretch{
+    align-items: stretch;
   }
 }
