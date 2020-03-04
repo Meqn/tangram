@@ -22,6 +22,7 @@ export function lineToHump(str) {
 
 // 样式 String 转 Object
 export function styleStrParse(styleStr) {
+  if (!styleStr) return null
   const styleObj = {}
   const regx = /(;\n)|(\n)|(;)/ig
   const styleArr = styleStr.replace(regx, '||').split('||')
