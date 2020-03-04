@@ -14,14 +14,14 @@
 
 ```
 .
-|____screenshot         // 截图
-| |____default.png      // 缩略图
 |____index.js           // 组件安装
 |____config.js          // 组件配置项
 |____README.md          // 组件说明文档
 |____src                // 组件源码
 | |____index.vue
-
+|____example            // 代码示例
+|____screenshot         // 截图
+| |____default.png      // 缩略图
 
 ```
 
