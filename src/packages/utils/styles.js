@@ -1,4 +1,4 @@
-import { isInvalid } from '@/utils'
+import { isInvalid, styleStrParse } from '@/utils'
 
 /**
  * 组件内公共样式 props
@@ -31,10 +31,6 @@ const styleSetting = {
   'opacity': {
     type: Number,
     default: undefined
-  },
-  'border': {
-    type: String,
-    default: ''
   },
   'paddingTop': {
     type: String,
@@ -91,16 +87,28 @@ const styleSetting = {
   'right': {
     type: String,
     default: ''
-  }
+  },
+  'borderClass': {
+    type: String,
+    default: ''
+  },
+  'extClass': {
+    type: String,
+    default: ''
+  },
+  'extStyle': {
+    type: String,
+    default: ''
+  },
 }
 
 // 公共样式属性
 export const styleProps = (function (conf) {
-  const obj = {}
+  const styleObj = {}
   Object.keys(conf).forEach(key => {
-    obj[key] = conf[key].default
+    styleObj[key] = conf[key].default
   })
-  return obj
+  return styleObj
 })(styleSetting)
 
 // 公共样式
@@ -109,13 +117,21 @@ export const styleMixin = (function (conf) {
     props: conf,
     computed: {
       commStyle () {
-        const obj = {}
+        const styleObj = {}
+        let extStyleObj = {}
+        const classKey = ['borderClass', 'extClass', 'extStyle']
         Object.keys(conf).forEach(key => {
-          if (!isInvalid(this[key])) {
-            obj[key] = this[key]
+          if (!isInvalid(this[key]) && classKey.indexOf(key) < 0) {
+            styleObj[key] = this[key]
           }
         })
-        return obj
+        if (this.extStyle) {
+          extStyleObj = styleStrParse(this.extStyle)
+        }
+        return Object.assign({}, extStyleObj, styleObj)
+      },
+      commClass () {
+        return [this.borderClass, this.extClass]
       }
     }
   }
