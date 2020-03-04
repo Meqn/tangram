@@ -1,9 +1,3 @@
-<template>
-  <div :class="['ta-page-container', mode]" :style="commStyle">
-    <slot></slot>
-  </div>
-</template>
-
 <script>
 import { styleMixin } from '@/packages/utils'
 
@@ -18,6 +12,12 @@ export default {
       },
       default: 'light'
     }
+  },
+  render (h) {
+    return h('div', {
+      class: ['ta-page-container', ...this.commClass, this.mode],
+      style: this.commStyle,
+    }, this.$slots.default)
   }
 }
 </script>

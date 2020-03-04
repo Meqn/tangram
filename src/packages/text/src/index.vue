@@ -1,5 +1,6 @@
 <script>
 import { styleMixin } from '@/packages/utils'
+import { styleStrParse } from '@/utils'
 
 export default {
   name: 'ta-text',
@@ -12,27 +13,26 @@ export default {
       type: String,
       default: ''
     },
-    styles: String,
-    className: String,
     fontSize: String,
     color: String
   },
   mixins: [styleMixin],
+  computed: {
+    extendStyle () {
+      const styleObj = {}
+      this.fontSize && (styleObj['fontSize'] = this.fontSize)
+      this.color && (styleObj['color'] = this.color)
+      return styleObj
+    }
+  },
   render(h) {
     return h(this.tag, {
-      class: this.className,
-      style: {
-        ...this.commStyle,
-        color: this.color,
-        fontSize: this.fontSize
-      },
-      attrs: {
-        style: this.styles
-      },
+      class: this.commClass,
+      style: Object.assign({}, this.commStyle, this.extendStyle),
       domProps: {
         innerHTML: this.content
       }
-    }, this.$slots.default)
+    })
   }
 }
 </script>

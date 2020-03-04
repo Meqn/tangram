@@ -10,10 +10,6 @@ export default {
       default: 'div'
     },
     display: String,
-    styles: {
-      type: String,
-      default: ''
-    },
     direction: {        // 排列方向
       type: String,
       validator(val) {
@@ -46,7 +42,7 @@ export default {
       if (this.display && this.display !== 'flex') {
         styleObj['display'] = this.display
       }
-      return Object.assign({}, styleStrParse(this.styles), styleObj)
+      return styleObj
     },
     extendClass () {
       if (this.display === 'flex') {
@@ -65,6 +61,7 @@ export default {
     return h(this.tag, {
       class: [
         'ta-view',
+        ...this.commClass,
         ...this.extendClass
       ],
       style: Object.assign({}, this.commStyle, this.extendStyle)
@@ -74,7 +71,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .ta-view{
   &-flex{
     > .drag-item{

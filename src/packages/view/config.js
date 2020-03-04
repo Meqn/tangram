@@ -72,11 +72,6 @@ export default {
         placeholder: '请选择',
         options: ['top', 'middle', 'bottom', 'baseline', 'stretch'].map(v => ({ label: v, value: v }))
       }
-    },
-    styles: {
-      label: '其他样式',
-      value: '',
-      type: 'textarea'
     }
   },
   slots: ['default']

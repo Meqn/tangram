@@ -6,6 +6,7 @@
     :justify="justify"
     :align="align"
     :style="commStyle"
+    :class="commClass"
   >
     <el-col :tag="colTag" v-for="item in col" :key="item.slot" :span="item.value">
       <slot :name="item.slot"></slot>
