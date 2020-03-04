@@ -2,9 +2,7 @@
   <div v-if="styles">
     <AttributeItem label="宽度" inline><CssInput v-model="styles.width" /></AttributeItem>
     <AttributeItem label="高度" inline><CssInput v-model="styles.height" /></AttributeItem>
-    <AttributeItem label="样式class" inline>
-      <el-input v-model="input" size="small"></el-input>
-    </AttributeItem>
+    <AttributeItem label="样式class" inline><el-input v-model="styles.extClass" size="small" /></AttributeItem>
     <AttributeItem label="背景色" inline>
       <el-color-picker v-model="styles.backgroundColor" size="small" show-alpha></el-color-picker>
     </AttributeItem>
@@ -24,10 +22,10 @@
     </AttributeItem>
     <!-- 边框样式 -->
     <AttributeItem label="内置边框" inline>
-      <el-select value="" placeholder="请选择" size="small" clearable>
-        <el-option value="1">边框样式1</el-option>
-        <el-option value="2">边框样式2</el-option>
-        <el-option value="3">边框样式3</el-option>
+      <el-select v-model="styles.borderClass" placeholder="请选择" size="small" clearable>
+        <el-option value="border1">边框样式1</el-option>
+        <el-option value="border2">边框样式2</el-option>
+        <el-option value="border3">边框样式3</el-option>
       </el-select>
     </AttributeItem>
     <!-- 内边距设置 -->
@@ -78,7 +76,6 @@
       </el-select>
     </AttributeItem>
     <div v-if="styles.position" class="sub-panel">
-      <div class="sub-pannel">
       <AttributeItem label="上" inline width="16px" class="mb8">
         <CssInput v-model="styles.top" auto placeholder="top" />
       </AttributeItem>
@@ -91,11 +88,20 @@
       <AttributeItem label="右" inline width="16px">
         <CssInput v-model="styles.right" auto placeholder="right" />
       </AttributeItem>
-    </div>
-      <AttributeItem label="层叠顺序" width="64px" inline>
+
+      <AttributeItem label="z-index级别" width="76px" inline>
         <el-input-number v-model="styles.zIndex" controls-position="right" size="small"></el-input-number>
       </AttributeItem>
+      
     </div>
+    <AttributeItem label="扩展样式">
+      <el-input
+        type="textarea"
+        size="small"
+        :autosize="{ minRows: 3, maxRows: 5}"
+        v-model="styles.extStyle">
+      </el-input>
+    </AttributeItem>
   </div>
   <div v-else>
     <el-divider content-position="left">无配置项</el-divider>

@@ -16,7 +16,7 @@
         :clone="clone"
         :group="{ name: 'page', pull: 'clone', put: false }">
         <template v-if="group.components && group.components.length > 0">
-        <ComponentItem v-for="component in group.components" :key="component.component" :data="component" />
+          <ComponentItem v-for="(component, index) in group.components" :key="index" :data="component" />
         </template>
       </Draggable>
     </el-collapse-item>

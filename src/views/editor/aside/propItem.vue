@@ -32,7 +32,7 @@ export default {
       type: Object,
       required: true
     },
-    value: [String, Number],
+    value: [String, Number, Boolean, Array, Object],
     list: {
       type: Object,
       required: true
@@ -40,14 +40,18 @@ export default {
   },
   computed: {
     subProps () {
-      const sub = this.data['relation']
-      if (Array.isArray(sub)) {
-        return sub
+      try {
+        const subItem = this.data['relation']
+        if (Array.isArray(subItem)) {
+          return subItem
+        }
+        if (isObject(subItem)) {
+          return subItem[this.value] || []
+        }
+        return []
+      } catch (err) {
+        return []
       }
-      if (isObject(sub)) {
-        return sub[this.value] || []
-      }
-      return []
     }
   }
 }
