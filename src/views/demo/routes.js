@@ -4,7 +4,8 @@ import CreateComponent from '@/views/demo/component'
 import Recurse from '@/views/demo/recurse'
 import Draggable from '@/views/demo/draggable'
 import NestDrag from './nestDrag'
-import contextMenu from './contextMenu'
+import ContextMenu from './contextMenu'
+import Package from './package'
 
 export default {
   path: '/demo',
@@ -49,9 +50,16 @@ export default {
     }, {
       path: 'contextMenu',
       name: 'demo-context-menu',
-      component: contextMenu,
+      component: ContextMenu,
       meta: {
         title: '右键菜单'
+      }
+    }, {
+      path: 'package',
+      name: 'demo-package',
+      component: Package,
+      meta: {
+        title: '组件demo'
       }
     }
   ]
