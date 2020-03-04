@@ -1,17 +1,14 @@
 <template>
-  <Wrap class="ta-monitor-slide" :style="commStyle"><slot></slot></Wrap>
+  <ta-component-wrapper class="ta-monitor-slide" :style="commStyle"><slot></slot></ta-component-wrapper>
 </template>
 
 <script>
 import { styleMixin } from '@/packages/utils'
-import Wrap from '@/packages/wrap'
+import Wrap from '@/packages/wrapper'
 
 export default {
   name: 'ta-monitor-slide',
-  mixins: [styleMixin],
-  components: {
-    Wrap
-  }
+  mixins: [styleMixin]
 }
 </script>
 
