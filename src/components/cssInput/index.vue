@@ -90,6 +90,7 @@ export default {
     resetValue () {
       this.input = ''
       this.unitVal =  'px'
+      this.$emit('input', '')
     }
   }
 }

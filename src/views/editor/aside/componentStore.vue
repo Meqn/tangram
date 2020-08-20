@@ -90,7 +90,7 @@ export default {
   data () {
     return {
       packages,
-      activeComponent: 'layout'
+      activeComponent: 'common'
     }
   },
   methods: {

@@ -15,17 +15,6 @@ import PageContainer, { pageContainerConfig } from './pageContainer'
 import Grid, { gridConfig } from './grid'
 import temp323Config from './layout/temp323'
 
-// 设备
-import Environment, { environmentConfig } from './environment'
-import Staff, { staffConfig } from './staff'
-import TowerCrane, { towerCraneConfig } from './towerCrane'
-import Elevator, { elevatorConfig } from './elevator'
-import MonitorSlide, { monitorSlideConfig } from './monitorSlide'
-
-// 图表
-
-// 其他
-
 /************************************************************************************
  * 组件部分
  */
@@ -39,13 +28,7 @@ const components = [
   View,
 
   PageContainer,
-  Grid,
-
-  Environment,
-  Staff,
-  TowerCrane,
-  Elevator,
-  MonitorSlide
+  Grid
 ]
 
 const install = function(Vue) {
@@ -87,11 +70,6 @@ export const packages = [
     name: 'device',
     icon: 'cpu',
     components: [
-      environmentConfig,
-      staffConfig,
-      towerCraneConfig,
-      elevatorConfig,
-      monitorSlideConfig
     ]
   },
   {

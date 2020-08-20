@@ -1,5 +1,5 @@
 <script>
-import { styleMixin } from '@/packages/utils'
+import { baseMixin } from '@/packages/utils'
 import { styleStrParse } from '@/utils'
 
 export default {
@@ -35,7 +35,7 @@ export default {
       }
     }
   },
-  mixins: [styleMixin],
+  mixins: [baseMixin],
   computed: {
     extendStyle () {
       const styleObj = {}

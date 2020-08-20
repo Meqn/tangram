@@ -21,7 +21,8 @@ module.exports = {
     'no-multi-spaces': 0,
     'spaced-comment': 0,
     'quotes': 0,
-    'quote-props': 0
+    'quote-props': 0,
+    'dot-notation': 0
   },
   overrides: [
     {

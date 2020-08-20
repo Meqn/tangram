@@ -1,105 +1,117 @@
-import { isInvalid, styleStrParse } from '@/utils'
-
 /**
  * 组件内公共样式 props
  */
-const styleSetting = {
-  width: {
+export const styleSetting = {
+  'width': {
     type: String,
     default: ''
   },
-  height: {
+  'height': {
     type: String,
     default: ''
   },
-  backgroundColor: {
+  'backgroundColor': {
     type: String,
     default: ''
   },
-  backgroundImage: {
+  'backgroundImage': {
     type: String,
     default: ''
   },
-  backgroundPosition: {
+  'backgroundRepeat': {
     type: String,
     default: ''
   },
-  backgroundSize: {
+  'backgroundPosition': {
     type: String,
     default: ''
   },
-  opacity: {
+  'backgroundSize': {
+    type: String,
+    default: ''
+  },
+  'opacity': {
     type: Number,
     default: undefined
   },
-  paddingTop: {
+  'paddingTop': {
     type: String,
     default: ''
   },
-  paddingBottom: {
+  'paddingBottom': {
     type: String,
     default: ''
   },
-  paddingLeft: {
+  'paddingLeft': {
     type: String,
     default: ''
   },
-  paddingRight: {
+  'paddingRight': {
     type: String,
     default: ''
   },
-  marginTop: {
+  'marginTop': {
     type: String,
     default: ''
   },
-  marginBottom: {
+  'marginBottom': {
     type: String,
     default: ''
   },
-  marginLeft: {
+  'marginLeft': {
     type: String,
     default: ''
   },
-  marginRight: {
+  'marginRight': {
     type: String,
     default: ''
   },
-  position: {
+  'position': {
     type: String,
     default: ''
   },
-  zIndex: {
+  'zIndex': {
     type: Number,
     default: undefined
   },
-  top: {
+  'top': {
     type: String,
     default: ''
   },
-  bottom: {
+  'bottom': {
     type: String,
     default: ''
   },
-  left: {
+  'left': {
     type: String,
     default: ''
   },
-  right: {
+  'right': {
     type: String,
     default: ''
   },
-  borderClass: {
+  'borderClass': {
     type: String,
     default: ''
   },
-  extClass: {
+  'extClass': {
     type: String,
     default: ''
   },
-  extStyle: {
+  'extStyle': {
     type: String,
     default: ''
   },
+}
+
+export const colors = {
+  gray: ['var(--gray-color)', 'var(--gray-light-color)'],
+  red: ['var(--red-color)', 'var(--red-light-color)'],
+  blue: ['var(--blue-color)', 'var(--blue-light-color)'],
+  green: ['var(--green-color)', 'var(--green-light-color)'],
+  orange: ['var(--orange-color)', 'var(--orange-light-color)'],
+  yellow: ['var(--yellow-color)', 'var(--yellow-light-color)'],
+  pink: ['var(--pink-color)', 'var(--pink-light-color)'],
 }
 
 // 公共样式属性
@@ -109,30 +121,4 @@ export const styleProps = (function (conf) {
     styleObj[key] = conf[key].default
   })
   return styleObj
-})(styleSetting)
-
-// 公共样式
-export const styleMixin = (function (conf) {
-  return {
-    props: conf,
-    computed: {
-      commStyle () {
-        const styleObj = {}
-        let extStyleObj = {}
-        const classKey = ['borderClass', 'extClass', 'extStyle']
-        Object.keys(conf).forEach(key => {
-          if (!isInvalid(this[key]) && classKey.indexOf(key) < 0) {
-            styleObj[key] = this[key]
-          }
-        })
-        if (this.extStyle) {
-          extStyleObj = styleStrParse(this.extStyle)
-        }
-        return Object.assign({}, extStyleObj, styleObj)
-      },
-      commClass () {
-        return [this.borderClass, this.extClass]
-      }
-    }
-  }
 })(styleSetting)

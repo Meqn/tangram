@@ -100,8 +100,7 @@ export default {
       }
     },
     onClickComponent (item) {
-      console.log('点击 ... ', item)
-      console.log('contextmenu : ', this.ctxMenu)
+      // console.log('contextmenu : ', this.ctxMenu)
       if (this.editable) {
         this.compareElement(item)
       }

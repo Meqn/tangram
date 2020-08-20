@@ -1,8 +1,3 @@
-import {
-  UPDATE_COMPONENTS,
-  UPDATE_CURRENT_COMPONENTS,
-  UPDATE_PREV_COMPONENTS
-} from '../mutation_types'
 
 const state = {
   components: [],
@@ -15,26 +10,39 @@ const state = {
 const getters = {}
 
 const mutations = {
-  [UPDATE_COMPONENTS] (state, payload) {
+  SET_COMPONENTS (state, payload) {
     state.components = payload
   },
-  [UPDATE_CURRENT_COMPONENTS] (state, payload) {
+  SET_CURRENT_COMPONENTS (state, payload) {
     state.currentComponent = payload
   },
-  [UPDATE_PREV_COMPONENTS] (state, payload) {
+  SET_PREV_COMPONENTS (state, payload) {
     state.prevComponent = payload
+  },
+  SET_TEMPLATE_CONFIG (state, payload) {
+    state.templateConfig = payload
+  },
+  SET_SCREEN_THEME (state, payload) {
+    state.screenTheme = payload
   }
 }
 
 const actions = {
   updateComponents ({ commit }, payload) {
-    commit(UPDATE_COMPONENTS, payload)
+    commit('SET_COMPONENTS', payload)
   },
   updateCurrentComponent ({ commit }, payload) {
-    commit(UPDATE_CURRENT_COMPONENTS, payload)
+    commit('SET_CURRENT_COMPONENTS', payload)
   },
   updatePrevComponent ({ commit }, payload) {
-    commit(UPDATE_PREV_COMPONENTS, payload)
+    commit('SET_PREV_COMPONENTS', payload)
+  },
+  updateTheme ({ state, commit }, payload) {
+    const theme = payload || (state.screenTheme === 'light' ? 'dark' : 'light')
+    commit('SET_SCREEN_THEME', theme)
+  },
+  updateTemplateConfig({ commit }, payload) {
+    commit('SET_TEMPLATE_CONFIG', payload)
   }
 }
 

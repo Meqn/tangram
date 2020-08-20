@@ -15,7 +15,7 @@
         :is="item.component"
         v-bind="cleanProp(item.props)"
         :key="item.info.id"
-        :class="{ 'is-active': editable && item.info.active }"
+        :class="[(item.slots && item.slots.length > 0) ? 'item-slot' : 'item-view', { 'is-active': editable && item.info.active }]"
         :ref="item.info.id"
         :id="item.info.id"
         @click.native.stop="onClickComponent(item)"

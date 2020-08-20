@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import { styleMixin } from '@/packages/utils'
+import { baseMixin } from '@/packages/utils'
 // props: ['gutter', 'justify', 'align']
 export default {
   name: 'ta-row',
-  mixins: [styleMixin],
+  mixins: [baseMixin],
 }
 </script>
 

@@ -6,18 +6,20 @@
     </el-tab-pane>
     <!-- 树状图 -->
     <el-tab-pane label="树状图" name="tree">
-      <el-tree :data="componentsTree" default-expand-all @node-click="onNodeClick"></el-tree>
+      <PageTree :list="components" />
     </el-tab-pane>
   </el-tabs>
 </template>
 <script>
 import { componentsTree } from '../mock'
 import ComponentStore from './componentStore'
+import PageTree from '../components/pageTree'
 
 export default {
   name: 'component-aside',
   components: {
-    ComponentStore
+    ComponentStore,
+    PageTree
   },
   data () {
     return {
@@ -25,12 +27,14 @@ export default {
       componentsTree
     }
   },
+  computed: {
+    components() {
+      return this.$store.state.page.components
+    }
+  },
   methods: {
     onTabChange (tab, event) {
       console.log(tab, event)
-    },
-    onNodeClick (data) {
-      console.log(data)
     }
   }
 }

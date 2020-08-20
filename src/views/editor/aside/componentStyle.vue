@@ -7,9 +7,17 @@
       <el-color-picker v-model="styles.backgroundColor" size="small" show-alpha></el-color-picker>
     </AttributeItem>
     <AttributeItem label="背景图">
-      <el-input placeholder="https://"  v-model="styles.backgroundImage" size="small">
-        <template slot="append">上传</template>
-      </el-input>
+      <upload-input v-model="styles.backgroundImage" accept=".jpg, .jpeg, .png, .gif" fileType="image" :fileSize="1024" />
+    </AttributeItem>
+    <AttributeItem label="平铺方式" inline  class="mb8">
+      <el-select v-model="styles.backgroundRepeat" placeholder="请选择" size="small" clearable>
+        <el-option
+          v-for="item in bgRepeatOptions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
     </AttributeItem>
     <AttributeItem label="背景位置" inline>
       <el-input v-model="styles.backgroundPosition" size="small"></el-input>
@@ -110,18 +118,20 @@
 
 <script>
 import { AttributeItem } from '../components'
-import { CssInput } from '@/components'
+import { CssInput, UploadInput } from '@/components'
 
 export default {
   name: 'component-style',
   components: {
     AttributeItem,
-    CssInput
+    CssInput,
+    UploadInput
   },
   data () {
     return {
       attrTab: 'style',
       positionOptions: ['static', 'relative', 'absolute'].map(v => ({ value: v, label: v })),
+      bgRepeatOptions: ['no-repeat', 'repeat', 'repeat-x', 'repeat-y', 'space', 'round'].map(v => ({ value: v, label: v })),
       isPadding: false,
       isMargin: false,
       input: ''
@@ -131,6 +141,11 @@ export default {
     styles () {
       const current = this.$store.state.page.currentComponent
       return (current && current.props)
+    }
+  },
+  methods: {
+    handleBackgroundImage({ raw }) {
+      this.styles.backgroundImage = raw
     }
   }
 }

@@ -6,13 +6,19 @@
   &-header{
     position: relative;
     display: flex;
-    // margin-bottom: 12px;
     align-items: center;
-    background-color: #fff;
+    color: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+    background-color: var(--primary-color);
 
     &-right{
       margin-left: auto;
+    }
+    .el-page-header__content{
+      color: #fff;
+    }
+    .el-button--text{
+      color: #fff;
     }
   }
   &-logo{
@@ -177,6 +183,12 @@
       overflow-y: auto;
       margin: 8px;
 
+      .ta-edit-area{
+        position: relative;
+        // overflow: hidden;
+        // overflow-x: auto;
+        // overflow-y: auto;
+      }
       &.editable{
         border: 1px dashed #999;
       }

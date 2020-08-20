@@ -1,9 +1,9 @@
 <script>
-import { styleMixin } from '@/packages/utils'
+import { baseMixin } from '@/packages/utils'
 
 export default {
   name: 'ta-page-container',
-  mixins: [styleMixin],
+  mixins: [baseMixin],
   props: {
     mode: {
       type: String,

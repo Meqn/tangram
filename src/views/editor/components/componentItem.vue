@@ -1,7 +1,7 @@
 <template>
   <li class="components-item">
     <div class="components-item-img"></div>
-    <p class="components-item-text">{{ data.info.name }}</p>
+    <p class="components-item-text">{{ data.info && data.info.name }}</p>
   </li>
 </template>
 

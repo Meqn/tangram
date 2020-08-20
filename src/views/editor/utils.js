@@ -1,4 +1,5 @@
 import { randomId, isObject, isInvalid } from '@/utils'
+import { packages } from '@/packages'
 import { mapActions } from 'vuex'
 import { styleProps } from '@/packages/utils'
 
@@ -18,7 +19,7 @@ export function cloneComponent(raw) {
     }
     // 设置 props（含 style、setting）
     const stylePropsCopy = JSON.parse(JSON.stringify(styleProps))
-    const propsObj = Object.assign({}, stylePropsCopy, style)
+    let propsObj = Object.assign({}, stylePropsCopy, style)
     if (setting) {
       for (const key in setting) {
         if (setting.hasOwnProperty(key)) {
@@ -91,6 +92,102 @@ export function cleanComponent(component) {
     }
     return data
   })(JSON.parse(JSON.stringify(component)))
+}
+
+/**
+ * 清除模版脏数据
+ * 1. 配置属性
+ * 2. 组件选择状态
+ */
+export function cleanTemplate(template) {
+  function clean(data) {
+    if (data.setting) {
+      Object.keys(data.setting).forEach(key => {
+        const val = data.setting[key].value
+        delete data.setting[key]
+        data.setting[key] = {
+          value: val
+        }
+      })
+    }
+    if (data.children && data.slots) {
+      data.slots.forEach(slot => {
+        data.children[slot].map(child => clean(child))
+      })
+    }
+    data.info && (delete data.info.active)
+    return data
+  }
+  return (function(template) {
+    return template.map(v => clean(v))
+  }(JSON.parse(JSON.stringify(template))))
+}
+
+/**
+ * 模版增加配置属性
+ */
+export function cloneTemplate(template) {
+  const components = allComponents('object')
+  function convert(data) {
+    let _component = components[data.component]
+    data.info && (data.info.active = false)
+    if (data.setting && _component) {
+      Object.keys(data.setting).forEach(key => {
+        data.setting[key] = Object.assign({}, _component.setting[key], data.setting[key])
+      })
+    }
+    if (data.children && data.slots) {
+      data.slots.forEach(slot => {
+        data.children[slot].map(child => convert(child))
+      })
+    }
+    return data
+  }
+  return (function(template) {
+    return template.map(v => convert(v))
+  }(template))
+}
+
+/**
+ * 获取所有组件
+ * @param {String} type 返回数据格式  ['array', 'object']
+ */
+export function allComponents(type = 'array') {
+  const componentsObj = {}
+  const components = packages.reduce((acc, { components }) => {
+    return acc.concat(components)
+  }, [])
+  if (type === 'object') {
+    components.forEach(v => {
+      componentsObj[v.component] = v
+    })
+    return componentsObj
+  }
+  return components
+}
+
+/**
+ * 模板字符串转component
+ * @param {String} template 
+ */
+export function templateToComponent(template) {
+  if (template) {
+    if (Array.isArray(template)) {
+      return template.map(item => {
+        return cloneComponent(item)
+      })
+    } else if (typeof template === 'string') {
+      const data = JSON.parse(template)
+      if (Array.isArray(data)) {
+        return data.map(item => {
+          return cloneComponent(item)
+        })
+      }
+    } else {
+      return []
+    }
+  }
+  return []
 }
 
 /**

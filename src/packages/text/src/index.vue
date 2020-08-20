@@ -1,5 +1,5 @@
 <script>
-import { styleMixin } from '@/packages/utils'
+import { baseMixin } from '@/packages/utils'
 import { styleStrParse } from '@/utils'
 
 export default {
@@ -16,12 +16,12 @@ export default {
     fontSize: String,
     color: String
   },
-  mixins: [styleMixin],
+  mixins: [baseMixin],
   computed: {
     extendStyle () {
       const styleObj = {}
-      this.fontSize && (styleObj.fontSize = this.fontSize)
-      this.color && (styleObj.color = this.color)
+      this.fontSize && (styleObj['fontSize'] = this.fontSize)
+      this.color && (styleObj['color'] = this.color)
       return styleObj
     }
   },

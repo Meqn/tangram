@@ -1,6 +1,8 @@
 <template>
 <AttributeItem
   :key="prop"
+  width="auto"
+  :inline="data.type === 'switch'"
   :label="data.label">
   
   <!-- 文本: text , number -->
@@ -112,7 +114,7 @@
           class="attr-grid"
           v-for="(grid, index) in propsValue[prop]"
           :key="grid.slot">
-          <i class="el-icon-s-unfold attr-grid-drag handle"></i>
+          <ta-icon name="move" class="attr-grid-drag handle" />
           <el-input-number
             class="ml8 mr12"
             v-model="grid.value"
@@ -122,7 +124,7 @@
             :step="1"
             size="mini">
           </el-input-number>
-          <i class="el-icon-remove attr-grid-remove" @click="onColRemove(index, grid, propsValue[prop])"></i>
+          <ta-icon name="minus-circle-fill" class="attr-grid-remove" @click="onColRemove(index, grid, propsValue[prop])" />
         </div>
       </transition-group>
       <template slot="footer">
@@ -135,6 +137,7 @@
       </template>
     </Draggable>
   </template>
+
 </AttributeItem>
 </template>
 
@@ -158,6 +161,11 @@ export default {
     data: {
       type: Object,
       required: true
+    }
+  },
+  data() {
+    return {
+      mediaDialogVisible: false
     }
   },
   computed: {

@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import { styleMixin } from '@/packages/utils'
+import { baseMixin } from '@/packages/utils'
 export default {
   name: 'ta-col',
-  mixins: [styleMixin],
+  mixins: [baseMixin],
 }
 </script>
