@@ -4,99 +4,99 @@ import { isInvalid, styleStrParse } from '@/utils'
  * 组件内公共样式 props
  */
 const styleSetting = {
-  'width': {
+  width: {
     type: String,
     default: ''
   },
-  'height': {
+  height: {
     type: String,
     default: ''
   },
-  'backgroundColor': {
+  backgroundColor: {
     type: String,
     default: ''
   },
-  'backgroundImage': {
+  backgroundImage: {
     type: String,
     default: ''
   },
-  'backgroundPosition': {
+  backgroundPosition: {
     type: String,
     default: ''
   },
-  'backgroundSize': {
+  backgroundSize: {
     type: String,
     default: ''
   },
-  'opacity': {
+  opacity: {
     type: Number,
     default: undefined
   },
-  'paddingTop': {
+  paddingTop: {
     type: String,
     default: ''
   },
-  'paddingBottom': {
+  paddingBottom: {
     type: String,
     default: ''
   },
-  'paddingLeft': {
+  paddingLeft: {
     type: String,
     default: ''
   },
-  'paddingRight': {
+  paddingRight: {
     type: String,
     default: ''
   },
-  'marginTop': {
+  marginTop: {
     type: String,
     default: ''
   },
-  'marginBottom': {
+  marginBottom: {
     type: String,
     default: ''
   },
-  'marginLeft': {
+  marginLeft: {
     type: String,
     default: ''
   },
-  'marginRight': {
+  marginRight: {
     type: String,
     default: ''
   },
-  'position': {
+  position: {
     type: String,
     default: ''
   },
-  'zIndex': {
+  zIndex: {
     type: Number,
     default: undefined
   },
-  'top': {
+  top: {
     type: String,
     default: ''
   },
-  'bottom': {
+  bottom: {
     type: String,
     default: ''
   },
-  'left': {
+  left: {
     type: String,
     default: ''
   },
-  'right': {
+  right: {
     type: String,
     default: ''
   },
-  'borderClass': {
+  borderClass: {
     type: String,
     default: ''
   },
-  'extClass': {
+  extClass: {
     type: String,
     default: ''
   },
-  'extStyle': {
+  extStyle: {
     type: String,
     default: ''
   },

@@ -20,8 +20,8 @@ export default {
   computed: {
     extendStyle () {
       const styleObj = {}
-      this.fontSize && (styleObj['fontSize'] = this.fontSize)
-      this.color && (styleObj['color'] = this.color)
+      this.fontSize && (styleObj.fontSize = this.fontSize)
+      this.color && (styleObj.color = this.color)
       return styleObj
     }
   },

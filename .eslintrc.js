@@ -3,13 +3,16 @@ module.exports = {
   env: {
     node: true
   },
-  'extends': [
+  extends: [
     'plugin:vue/essential',
     '@vue/standard'
   ],
+  parserOptions: {
+    parser: 'babel-eslint'
+  },
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-unused-vars': 0,
     'comma-dangle': 0,
     'no-trailing-spaces': 0,
@@ -17,10 +20,8 @@ module.exports = {
     'no-useless-escape': 0,
     'no-multi-spaces': 0,
     'spaced-comment': 0,
-    'quotes': 0
-  },
-  parserOptions: {
-    parser: 'babel-eslint'
+    'quotes': 0,
+    'quote-props': 0
   },
   overrides: [
     {

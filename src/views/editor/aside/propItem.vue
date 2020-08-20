@@ -41,7 +41,7 @@ export default {
   computed: {
     subProps () {
       try {
-        const subItem = this.data['relation']
+        const subItem = this.data.relation
         if (Array.isArray(subItem)) {
           return subItem
         }

@@ -4,6 +4,7 @@ const resolve = (dir) => path.join(__dirname, dir)
 
 module.exports = {
   parallel: require('os').cpus().length > 1,
+  lintOnSave: false,
   devServer: {
     port: 3600
   },

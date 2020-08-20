@@ -18,7 +18,7 @@ export function cloneComponent(raw) {
     }
     // 设置 props（含 style、setting）
     const stylePropsCopy = JSON.parse(JSON.stringify(styleProps))
-    let propsObj = Object.assign({}, stylePropsCopy, style)
+    const propsObj = Object.assign({}, stylePropsCopy, style)
     if (setting) {
       for (const key in setting) {
         if (setting.hasOwnProperty(key)) {
